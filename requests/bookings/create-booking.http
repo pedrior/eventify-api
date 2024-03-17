@@ -1,0 +1,14 @@
+POST {{base_url}}/v1/bookings/
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "ticket_id": "{{ticket_id}}"
+}
+
+> {%
+if (response.status === 201) {
+  client.global.set('booking_id', response.body.id);
+}
+%}

@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Eventify.Application\Eventify.Application.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Amazon.AspNetCore.Identity.Cognito" Version="3.0.1" />
+      <PackageReference Include="AWSSDK.S3" Version="3.7.305.31" />
+      <PackageReference Include="EntityFrameworkCore.NamingConventions" Version="8.0.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+      <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+      <PackageReference Include="Serilog.Enrichers.Sensitive" Version="1.7.3" />
+      <PackageReference Include="Serilog.Sinks.Seq" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Common\Data\Migrations\dd.cs" />
+    </ItemGroup>
+</Project>

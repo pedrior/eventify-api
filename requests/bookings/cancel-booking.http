@@ -1,0 +1,2 @@
+POST {{base_url}}/v1/bookings/{{booking_id}}/cancel
+Authorization: Bearer {{access_token}}

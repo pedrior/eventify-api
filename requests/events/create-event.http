@@ -1,0 +1,30 @@
+POST {{base_url}}/v1/events
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": ".NET Conference",
+  "category": "conference",
+  "language": "en",
+  "description": "This time at .NET Conference, we will be discussing the latest trends in .NET development. Join us to learn from the experts and network with other developers in João Pessoa, Brazil.",
+  "period": {
+    "start": "2024-12-01T03:00:00+00:00",
+    "end": "2024-12-3T03:00:00+00:00"
+  },
+  "location": {
+    "name": "Centro de Convenções de João Pessoa",
+    "address": "Rodovia PB-008, Km 5 s/n Polo Turístico - Cabo Branco",
+    "zip_code": "58000000",
+    "city": "João Pessoa",
+    "state": "PB",
+    "country": "BR"
+  }
+}
+
+> {%
+if (response.status === 201) {
+  client.global.set('event_id', response.body.id);
+  client.global.set('event_slug', response.body.slug);
+}
+%}

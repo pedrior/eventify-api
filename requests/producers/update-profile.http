@@ -1,0 +1,9 @@
+PUT {{base_url}}/v1/producers
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "J.D Events",
+  "email": "jdevents@contact.com",
+  "phone_number": "+5581999999999"
+}

@@ -1,0 +1,19 @@
+PUT {{base_url}}/v1/tickets/{{ticket_id}}
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Day 1",
+  "description": "The first day!",
+  "price": 19.80,
+  "quantity": 120,
+  "sale_start": "2024-11-25T03:00:00+00:00",
+  "sale_end": "2024-12-01T03:00:00+00:00"
+}
+
+> {%
+if (response.status === 201) {
+  client.global.set('ticket_id', response.body.id);
+}
+%}

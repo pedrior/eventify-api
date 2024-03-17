@@ -1,0 +1,9 @@
+POST {{base_url}}/v1/attendees/picture
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Authorization: Bearer {{access_token}}
+
+--WebAppBoundary
+Content-Disposition: form-data; name="picture"; filename="attendee_picture.jpg"
+Content-Type: image/jpeg
+
+< ../.images/attendee_picture.jpg

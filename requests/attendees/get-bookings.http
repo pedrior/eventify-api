@@ -1,0 +1,3 @@
+GET {{base_url}}/v1/attendees/bookings
+Accept: application/json
+Authorization: Bearer {{access_token}}

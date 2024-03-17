@@ -1,0 +1,10 @@
+PUT {{base_url}}/v1/events/{{event_id}}/details
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Conferência .NET",
+  "category": "conference",
+  "language": "pt",
+  "description": "A melhor conferência de .NET do Brasil dessa vez na cidade de Olinda - Pernambuco."
+}

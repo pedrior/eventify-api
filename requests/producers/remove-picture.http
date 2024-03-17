@@ -1,0 +1,2 @@
+DELETE {{base_url}}/v1/producers/picture
+Authorization: Bearer {{access_token}}

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>0d538a63-ea1c-414d-bf65-48733f2476b7</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Eventify.Application\Eventify.Application.csproj"/>
+        <ProjectReference Include="..\Eventify.Contracts\Eventify.Contracts.csproj" />
+        <ProjectReference Include="..\Eventify.Infrastructure\Eventify.Infrastructure.csproj"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Content Include="..\..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Asp.Versioning.Http" Version="8.0.0" />
+      <PackageReference Include="Asp.Versioning.Mvc" Version="8.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+</Project>

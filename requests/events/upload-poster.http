@@ -1,0 +1,9 @@
+POST {{base_url}}/v1/events/{{event_id}}/poster
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Authorization: Bearer {{access_token}}
+
+--WebAppBoundary
+Content-Disposition: form-data; name="poster"; filename="event_poster.jpg"
+Content-Type: image/jpeg
+
+< ../.images/event_poster.jpg

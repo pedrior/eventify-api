@@ -1,0 +1,2 @@
+POST {{base_url}}/v1/events/{{event_id}}/publish
+Authorization: Bearer {{access_token}}

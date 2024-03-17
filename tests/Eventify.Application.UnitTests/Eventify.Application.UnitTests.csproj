@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Eventify.Application\Eventify.Application.csproj" />
+        <ProjectReference Include="..\..\src\Eventify.Domain\Eventify.Domain.csproj" />
+        <ProjectReference Include="..\Eventify.TestUtils\Eventify.TestUtils.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Attendees\Commands\" />
+      <Folder Include="Account\Commands\" />
+      <Folder Include="Events\Queries\" />
+      <Folder Include="Producers\Commands\" />
+      <Folder Include="Tickets\Queries\" />
+      <Folder Include="Tokens\Commands\" />
+    </ItemGroup>
+</Project>

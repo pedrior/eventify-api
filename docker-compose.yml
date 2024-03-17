@@ -1,0 +1,53 @@
+﻿name: eventify
+
+services:
+  eventify.api:
+    image: eventify.presentation
+    container_name: eventify.api
+    build:
+      context: .
+      dockerfile: src/Eventify.Presentation/Dockerfile
+    depends_on:
+      eventify.db:
+        condition: service_healthy
+    ports:
+      - 8000:8080
+      - 8001:8081
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:8081;http://+:8080
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Eventify.Presentation.pfx
+      - ConnectionStrings__DefaultConnection=Host=eventify.db;Database=eventify;Username=postgres;Password=postgres
+      - AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+      - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+    volumes:
+      - $APPDATA/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - $USERPROFILE/.aspnet/https:/https:ro
+  
+  eventify.db:
+    image: postgres:latest
+    container_name: eventify.db
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+    ports:
+      - "8003:5432"
+    environment:
+      - POSTGRES_DB=eventify
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - .data:/var/lib/postgresql/data
+        
+  eventify.seq:
+    image: datalust/seq:latest
+    container_name: eventify.seq
+    ports:
+      - "5341:80"
+      - "5342:443"
+    environment:
+      - ACCEPT_EULA=Y

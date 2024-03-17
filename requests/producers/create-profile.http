@@ -1,0 +1,12 @@
+POST {{base_url}}/v1/producers
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "J.D Events",
+  "bio": "We are a team of event producers that have been in the industry for over 20 years. We have produced events for some of the biggest companies in the world and we are excited to bring our expertise to your next event.",
+  "email": "jdevents@contact.com",
+  "phone_number": "+5581999999999",
+  "website_url": "https://www.jdevents.com"
+}

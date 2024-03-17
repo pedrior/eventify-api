@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Eventify.Infrastructure\Eventify.Infrastructure.csproj" />
+      <ProjectReference Include="..\Eventify.TestUtils\Eventify.TestUtils.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="RichardSzalay.MockHttp" Version="7.0.0" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,8 @@
+PUT {{base_url}}/v1/attendees
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "given_name": "Jane",
+  "family_name": "Doe"
+}

@@ -1,0 +1,14 @@
+POST {{base_url}}/v1/tokens/refresh
+Accept: application/json
+Content-Type: application/json
+
+{
+  "user_id": "00000000-0000-0000-0000-000000000000",
+  "refresh_token": "{{refresh_token}}"
+}
+
+> {%
+if (response.status === 200) {
+  client.global.set('access_token', response.body.access_token);
+}
+%}

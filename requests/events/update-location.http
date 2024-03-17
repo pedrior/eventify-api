@@ -1,0 +1,12 @@
+PUT {{base_url}}/v1/events/{{event_id}}/location
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "Classic Hall",
+  "address": "Av. Gov. Agamenon Magalhães, S/N - Salgadinho",
+  "zip_code": "53110710",
+  "city": "Olinda",
+  "state": "PE",
+  "country": "BR"
+}

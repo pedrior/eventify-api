@@ -1,0 +1,12 @@
+POST {{base_url}}/v1/account/register
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "john@doe.com",
+  "password": "JohnDoe123",
+  "given_name": "John",
+  "family_name": "Doe",
+  "phone_number": "+5581999999999",
+  "birth_date": "2000-09-05"
+}
