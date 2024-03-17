@@ -19,3 +19,9 @@ To successfully build and run this project, you will need the following tools pr
 AWS Cognito [Pre Sign-Up](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-pre-sign-up.html#user-pool-lambda-pre-sign-up-flows) event.
 This Lambda Function is used to automatically confirm the user during registration. Build and deploy this Lambda function to AWS and configure Cognito to trigger it.
 Otherwise, manual user confirmation will be required. Also, create the user groups `attendee` and `producer` to manage user roles in the system.
+
+## :sparkles: Project
+
+### :bulb: Overview
+
+Eventify is a simple event platform where producers can create and manage events, and attendees can search for events and book tickets.
