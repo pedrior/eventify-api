@@ -32,3 +32,8 @@ The project follows the Clean Architecture principles inspired by [Jason Taylor'
 with some modifications to suit my preferences and needs.
 
 ![Clean Architecture Design](./images/clean-architecture.jpg)
+
+## :page_with_curl: License
+
+This project is licensed under the terms of the [MIT](https://github.com/pedrior/eventify-api/blob/master/LICENSE)
+license.
