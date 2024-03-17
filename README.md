@@ -25,3 +25,10 @@ Otherwise, manual user confirmation will be required. Also, create the user grou
 ### :bulb: Overview
 
 Eventify is a simple event platform where producers can create and manage events, and attendees can search for events and book tickets.
+
+### :triangular_ruler: Architecture
+
+The project follows the Clean Architecture principles inspired by [Jason Taylor's Clean Architecture Solution Template](https://github.com/jasontaylordev/CleanArchitecture),
+with some modifications to suit my preferences and needs.
+
+![Clean Architecture Design](./images/clean-architecture.jpg)
