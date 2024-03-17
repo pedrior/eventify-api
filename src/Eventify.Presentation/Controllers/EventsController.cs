@@ -10,6 +10,7 @@ using Eventify.Application.Events.Commands.UpdateSlug;
 using Eventify.Application.Events.Commands.UploadPoster;
 using Eventify.Application.Events.Queries.GetEvent;
 using Eventify.Application.Events.Queries.GetEventEditable;
+using Eventify.Application.Events.Queries.GetEvents;
 using Eventify.Contracts.Events.Requests;
 
 namespace Eventify.Presentation.Controllers;
@@ -71,6 +72,14 @@ public sealed class EventsController : ApiController
         return result.Match(onValue: Ok, onError: Problem);
     }
 
+    [HttpGet, AllowAnonymous]
+    public async Task<IActionResult> GetEvents([FromQuery] GetEventsRequest request,
+        CancellationToken cancellationToken)
+    {
+        var result = await SendAsync(request.Adapt<GetEventsQuery>(), cancellationToken);
+        return result.Match(onValue: Ok, onError: Problem);
+    }
+
     [HttpPut("{id:guid}/details")]
     public async Task<IActionResult> UpdateDetails(Guid id, UpdateEventDetailsRequest request,
         CancellationToken cancellationToken)
@@ -118,7 +127,7 @@ public sealed class EventsController : ApiController
 
         return result.Match(onValue: _ => NoContent(), onError: Problem);
     }
-    
+
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
     {

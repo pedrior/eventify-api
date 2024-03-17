@@ -19,7 +19,6 @@
     <ItemGroup>
       <Folder Include="Attendees\Commands\" />
       <Folder Include="Account\Commands\" />
-      <Folder Include="Events\Queries\" />
       <Folder Include="Producers\Commands\" />
       <Folder Include="Tickets\Queries\" />
       <Folder Include="Tokens\Commands\" />

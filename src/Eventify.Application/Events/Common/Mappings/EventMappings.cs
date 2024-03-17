@@ -28,6 +28,11 @@ internal sealed class EventMappings : IRegister
             .Map(dest => dest.Language, src => src.Details.Language)
             .Map(dest => dest.Description, src => src.Details.Description);
 
+        config.NewConfig<Event, EventSummaryResponse>()
+            .Map(dest => dest.Name, src => src.Details.Name)
+            .Map(dest => dest.Category, src => src.Details.Category)
+            .Map(dest => dest.Language, src => src.Details.Language);
+
         config.NewConfig<CreateEventRequest, CreateEventCommand>()
             .Map(dest => dest.PeriodStart, src => src.Period.Start)
             .Map(dest => dest.PeriodEnd, src => src.Period.End)
