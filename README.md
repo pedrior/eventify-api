@@ -5,6 +5,13 @@ CQRS and other technologies.
 
 👉 This project was developed for educational purposes, but feel free to use it as a reference or for any other purpose.
 
+## :pushpin: Index
+
+- [Requirements](#memo-requirements)
+- [Project](#sparkles-project)
+- [Getting Started](#runner-getting-started)
+- [License](#page_with_curl-license)
+
 ## :memo: Requirements
 
 To successfully build and run this project, you will need the following tools properly configured:
