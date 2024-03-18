@@ -99,6 +99,10 @@ docker compose up --build
 
 ## :globe_with_meridians: Endpoints
 
+### :pushpin: Endpoints Index
+
+- [Account Endpoints](#account)
+
 __Location__
 
 The API is available at `https://localhost:8081/api/{version}`.
@@ -177,6 +181,80 @@ Examples:
   "traceId": "00-204f3dc9742993c27181094fa3f707ff-8b8ec56e88d528e4-00"
 }
 ```
+
+### Account
+
+#### Login
+
+Allows users to authenticate within the system. The response includes the tokens for accessing the protected endpoints.
+
+```http
+POST /v1/account/login
+```
+
+__Request example:__
+
+```json
+{
+  "email": "john@doe.com",
+  "password": "JohnDoe123"
+}
+```
+
+__Body Parameters:__
+
+| Parameter | Type   | Description          | Required |
+|-----------|--------|----------------------|----------|
+| email     | string | The user's email.    | Yes      |
+| password  | string | The user's password. | Yes      |
+
+__Expected response:__
+
+200 - OK
+
+```json
+{
+  "access_token": "eyJraWQiOiI0ZlhUQUtrTlZRcHVZS21zM3oya0g0ZUFGMlFjUUZra2NtY2l6UE1z...",
+  "refresh_token": "eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ...",
+  "expires_in": 3600
+}
+```
+
+<hr/>
+
+#### Register
+
+Alloews users to register an account within the system.
+
+```http
+POST /v1/account/register
+```
+
+__Request example:__
+
+```json
+{
+  "email": "john@doe.com",
+  "password": "JohnDoe123",
+  "given_name": "John",
+  "family_name": "Doe",
+  "birth_date": "2000-09-05"
+}
+```
+
+__Body Parameters:__
+
+| Parameter   | Type   | Description             | Required |
+|-------------|--------|-------------------------|----------|
+| email       | string | The user's email.       | Yes      |
+| password    | string | The user's password.    | Yes      |
+| given_name  | string | The user's given name.  | Yes      |
+| family_name | string | The user's family name. | Yes      |
+| birth_date  | string | The user's birth date.  | Yes      |
+
+__Expected response__
+
+201 - Created
 
 ## :page_with_curl: License
 
