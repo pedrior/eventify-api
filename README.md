@@ -143,11 +143,13 @@ The API uses standard HTTP response codes to indicate the success or failure of 
 
 __Errors__
 
-The API provides error responses compliant with RFC 7807. Example:
+The API provides error responses compliant with RFC 7807. The response may contain additional fields to provide a more detailed description of the error.
+
+Examples:
 
 ```json
 {
-  "type": "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.8",
+  "type": "https://tools.ietf.org/html/rfc9110#section-15.5.10",
   "title": "The producer profile already exists",
   "status": 409,
   "traceId": "00-644db4453cc9472b833eb729cb4f5db1-96612bcce84a96ad-00",
@@ -155,7 +157,26 @@ The API provides error responses compliant with RFC 7807. Example:
 }
 ```
 
-The response may contain additional fields to provide a more detailed description of the error.
+```json
+{
+  "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+  "title": "One or more validation errors occurred.",
+  "status": 400,
+  "errors": {
+    "language": [
+      "Must be a supported language."
+    ],
+    "period_start": [
+      "Must be in the future."
+    ],
+    "location_name": [
+      "Must not be empty.",
+      "Must contain only letters, numbers and special characters."
+    ]
+  },
+  "traceId": "00-204f3dc9742993c27181094fa3f707ff-8b8ec56e88d528e4-00"
+}
+```
 
 ## :page_with_curl: License
 
