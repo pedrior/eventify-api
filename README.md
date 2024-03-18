@@ -10,6 +10,7 @@ CQRS and other technologies.
 - [Requirements](#memo-requirements)
 - [Project](#sparkles-project)
 - [Getting Started](#runner-getting-started)
+- [Endpoints](#globe_with_meridians-endpoints)
 - [License](#page_with_curl-license)
 
 ## :memo: Requirements
@@ -95,6 +96,66 @@ dotnet ef database update -s src/Eventify.Presentation -p src/Eventify.Infrastru
 ```shell
 docker compose up --build
 ```
+
+## :globe_with_meridians: Endpoints
+
+__Location__
+
+The API is available at `https://localhost:8081/api/{version}`.
+
+__Versioning__
+
+The API is versioned through the URL path. By default, all endpoints use the `v1` version of the API.
+
+__Authorization__
+
+The API utilizes JWT Bearer Authentication for endpoint protection. When making authenticated requests, you need to include the access token in the `Authorization` header with the `Bearer` scheme.
+
+> :information_source: You can obtain an `access_token` by sending a request to the `login` endpoint.
+
+If you fail to provide the access token or provide an invalid one, you will get a `401 Unauthorized` response. If you provide a valid access token but lack authorization for the request, you will receive a `403 Forbidden` response.
+
+```http
+Authorization: Bearer {access_token}
+```
+
+__Rate Limiting:__
+
+Most endpoints have rate limits to prevent abuse. If you surpass the request limit within a specific time frame, you will get a `429 Too Many Requests` response.
+
+__Responses__
+
+The API uses standard HTTP response codes to indicate the success or failure of an API request.
+
+| Code                        | Description                                                                                     |
+|-----------------------------|-------------------------------------------------------------------------------------------------|
+| 200 - OK                    | Everything worked as expected.                                                                  |
+| 201 - Created               | Everything worked as expected.                                                                  |
+| 204 - No Content            | Everything worked as expected.                                                                  |
+| 400 - Bad Request           | The request was unacceptable, often due to missing a required parameter or malformed parameter. |
+| 401 - Unauthorized          | The request requires user authentication.                                                       |
+| 403 - Forbidden             | The user is authenticated but not authorized to perform the request.                            |
+| 404 - Not Found             | The requested resource doesn’t exist.                                                           |
+| 409 - Conflict              | The request could not be completed due to a conflict with the current state of the resource.    |
+| 422 - Unprocessable Entity  | The request body was acceptable but unable to be processed, often due to business logic errors. |
+| 429 - Too Many Requests     | Too many requests hit the API too quickly.                                                      |
+| 500 - Internal Server Error | An unexpected error occurred.                                                                   |
+
+__Errors__
+
+The API provides error responses compliant with RFC 7807. Example:
+
+```json
+{
+  "type": "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.8",
+  "title": "The producer profile already exists",
+  "status": 409,
+  "traceId": "00-644db4453cc9472b833eb729cb4f5db1-96612bcce84a96ad-00",
+  "code": "producer.profile_already_created"
+}
+```
+
+The response may contain additional fields to provide a more detailed description of the error.
 
 ## :page_with_curl: License
 
