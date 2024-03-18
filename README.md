@@ -130,8 +130,8 @@ The API uses standard HTTP response codes to indicate the success or failure of 
 | Code                        | Description                                                                                     |
 |-----------------------------|-------------------------------------------------------------------------------------------------|
 | 200 - OK                    | Everything worked as expected.                                                                  |
-| 201 - Created               | Everything worked as expected.                                                                  |
-| 204 - No Content            | Everything worked as expected.                                                                  |
+| 201 - Created               | Everything worked as expected, and as result, has created a new resource.                       |
+| 204 - No Content            | Everything worked as expected, but is not going to return any content.                          |
 | 400 - Bad Request           | The request was unacceptable, often due to missing a required parameter or malformed parameter. |
 | 401 - Unauthorized          | The request requires user authentication.                                                       |
 | 403 - Forbidden             | The user is authenticated but not authorized to perform the request.                            |
