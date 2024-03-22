@@ -256,6 +256,37 @@ __Expected response__
 
 201 - Created
 
+<hr/>
+
+### Attendee
+
+#### Get Attendee Profile
+
+Retrieves the attendee's profile information.
+
+```http
+GET /v1/attendees
+```
+
+__Expected response__
+
+200 - OK
+
+```json
+{
+  "given_name": "John",
+  "family_name": "Doe",
+  "email": "john@doe.com",
+  "phone_number": "+5581999999999",
+  "birth_date": "2000-09-05",
+  "picture_url": "https://{storage-name}.s3.{storage-region}.amazonaws.com/attendees/{attendee-id}/picture",
+  "created_at": "2024-03-17T20:22:20.1354120-03:00",
+  "updated_at": "2024-03-22T10:30:41.3698490-03:00"
+}
+```
+
+<hr/>
+
 ## :page_with_curl: License
 
 This project is licensed under the terms of the [MIT](https://github.com/pedrior/eventify-api/blob/master/LICENSE)
