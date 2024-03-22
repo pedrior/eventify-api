@@ -238,19 +238,21 @@ __Request example:__
   "password": "JohnDoe123",
   "given_name": "John",
   "family_name": "Doe",
+  "phone_number": "+5581999999999",
   "birth_date": "2000-09-05"
 }
 ```
 
 __Body Parameters:__
 
-| Parameter   | Type   | Description             | Required |
-|-------------|--------|-------------------------|----------|
-| email       | string | The user's email.       | Yes      |
-| password    | string | The user's password.    | Yes      |
-| given_name  | string | The user's given name.  | Yes      |
-| family_name | string | The user's family name. | Yes      |
-| birth_date  | string | The user's birth date.  | Yes      |
+| Parameter     | Type   | Description               | Required |
+|---------------|--------|---------------------------|----------|
+| email         | string | The user's email.         | Yes      |
+| password      | string | The user's password.      | Yes      |
+| given_name    | string | The user's given name.    | Yes      |
+| family_name   | string | The user's family name.   | Yes      |
+| phone_number  | string | The user's phone number.  | Yes      |
+| birth_date    | string | The user's birth date.    | Yes      |
 
 __Expected response__
 
