@@ -224,7 +224,7 @@ __Expected response:__
 
 #### Register
 
-Alloews users to register an account within the system.
+Allows users to register an account within the system.
 
 ```http
 POST /v1/account/register
