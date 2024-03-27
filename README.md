@@ -323,7 +323,7 @@ __Expected response__
 {
   "page": 1,
   "limit": 10,
-  "total": 3,
+  "total": 2,
   "items": [
     {
       "id": "32ab6176-3917-4552-9871-b200578af019",
