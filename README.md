@@ -1,7 +1,6 @@
 # Eventify API
 
-An Event Platform API built with ASP.NET Core, EF Core, PostgreSQL, Amazon S3, Amazon Cognito, Clean Architecture, DDD,
-CQRS and other technologies.
+A REST API built using ASP.NET Core, EF Core, PostgreSQL, AWS, Clean Architecture, DDD, CQRS, and other technologies. This project exemplifies top coding standards, providing a neat, effective, and scalable solution.
 
 👉 This project was developed for educational purposes, but feel free to use it as a reference or for any other purpose.
 
