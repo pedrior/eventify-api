@@ -251,8 +251,8 @@ __Body Parameters:__
 | password      | string | The user's password.      | Yes      |
 | given_name    | string | The user's given name.    | Yes      |
 | family_name   | string | The user's family name.   | Yes      |
-| phone_number  | string | The user's phone number.  | Yes      |
-| birth_date    | string | The user's birth date.    | Yes      |
+| phone_number  | string | The user's phone number.  | No       |
+| birth_date    | string | The user's birth date.    | No       |
 
 __Expected response__
 
