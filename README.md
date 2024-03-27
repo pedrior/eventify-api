@@ -33,6 +33,18 @@ Otherwise, manual user confirmation will be required. Also, create the user grou
 
 Eventify is a simple event platform where producers can create and manage events, and attendees can search for events and book tickets.
 
+__Some cool features you will discover here:__
+
+- __Clean Architecture__: The project follows the principles of Clean Architecture, which emphasize separating concerns and defining clear responsibilities.
+- __DDD__: A software design approach that prioritizes the problem domain over technology, aiming to develop systems that align with the language and requirements of the business.
+- __CQRS__: An architectural pattern that separates the read and update operations of a data store (in this project, encouraged more as a code style, as we use a single database).
+- __API Versioning__: The project adopts versioning to facilitate progressive changes while maintaining backward compatibility.
+- __API Rate Limiting:__ The project adopts rate limiting to prevent request abuses.
+- __Authentication and Authorization__: The project implements authentication and authorization with JWT.
+- __Unit Testing__: The solution includes individual test projects for unit testing the API layers.
+- __Database Transactions__: The project supports database transactions. Each command that implements the ITransactional interface is executed in a single transaction.
+- __Pipeline Behaviors__: The project implements various Pipeline Behaviors for managing Authorization, Exceptions, Logging, Transactions, and Validations.
+
 ### :triangular_ruler: Architecture
 
 The project follows the Clean Architecture principles inspired by [Jason Taylor's Clean Architecture Solution Template](https://github.com/jasontaylordev/CleanArchitecture),
