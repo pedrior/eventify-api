@@ -5,7 +5,7 @@ namespace Eventify.Domain.UnitTests.Bookings.Enums;
 [TestSubject(typeof(BookingState))]
 public sealed class BookingStateTests
 {
-    public static IEnumerable<object[]> ActiveBookingStatus()
+    public static IEnumerable<object[]> ActiveBookingState()
     {
         yield return [BookingState.Pending, true];
         yield return [BookingState.Paid, true];
@@ -33,7 +33,7 @@ public sealed class BookingStateTests
         yield return [BookingState.Cancelled, BookingState.Cancelled, false];
     }
 
-    [Theory, MemberData(nameof(ActiveBookingStatus))]
+    [Theory, MemberData(nameof(ActiveBookingState))]
     public void IsActive_WhenCalled_ReturnsExpectedResult(BookingState state, bool expected)
     {
         // Arrange
