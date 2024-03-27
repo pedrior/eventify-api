@@ -5,11 +5,11 @@ Authorization: Bearer {{access_token}}
 
 {
   "event_id": "{{event_id}}",
-  "name": "Day 4",
-  "description": "The first day of the event.",
-  "price": 17.00,
+  "name": "Night VIP",
+  "description": "VIP ticket for the night event",
+  "price": 30.00,
   "quantity": 50,
-  "quantity_per_sale": 2,
+  "quantity_per_sale": 1,
   "sale_start": null,
   "sale_end": null
 }

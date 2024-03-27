@@ -29,11 +29,17 @@ public sealed class AttendeesController : ApiController
         var result = await SendAsync(new GetAttendeeProfileQuery(), cancellationToken);
         return result.Match(onValue: Ok, onError: Problem);
     }
-    
+
     [HttpGet("bookings")]
-    public async Task<IActionResult> GetBookings(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetBookings([FromQuery] GetAttendeeBookingsRequest request,
+        CancellationToken cancellationToken)
     {
-        var result = await SendAsync(new GetAttendeeBookingsQuery(), cancellationToken);
+        var result = await SendAsync(new GetAttendeeBookingsQuery
+        {
+            Page = request.Page,
+            Limit = request.Limit
+        }, cancellationToken);
+
         return result.Match(onValue: Ok, onError: Problem);
     }
 
