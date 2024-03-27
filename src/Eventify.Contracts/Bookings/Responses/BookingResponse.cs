@@ -8,7 +8,7 @@ public sealed record BookingResponse
 
     public int TotalQuantity { get; init; }
 
-    public string Status { get; init; } = null!;
+    public string State { get; init; } = null!;
 
     public DateTimeOffset PlacedAt { get; init; }
 
