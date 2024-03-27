@@ -1,4 +1,4 @@
-PUT {{base_url}}/v1/tickets/{{ticket_id}}
+POST {{base_url}}/v1/tickets/{{ticket_id}}
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{access_token}}

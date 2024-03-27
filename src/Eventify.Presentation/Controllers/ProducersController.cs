@@ -46,7 +46,7 @@ public sealed class ProducersController : ApiController
         return result.Match(onValue: Ok, onError: Problem);
     }
 
-    [HttpPut]
+    [HttpPost]
     public async Task<IActionResult> UpdateProfile(UpdateProducerProfileRequest request,
         CancellationToken cancellationToken)
     {

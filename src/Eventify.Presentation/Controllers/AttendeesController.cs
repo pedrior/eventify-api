@@ -37,7 +37,7 @@ public sealed class AttendeesController : ApiController
         return result.Match(onValue: Ok, onError: Problem);
     }
 
-    [HttpPut]
+    [HttpPost]
     public async Task<IActionResult> UpdateProfile(UpdateAttendeeProfileRequest request,
         CancellationToken cancellationToken)
     {
