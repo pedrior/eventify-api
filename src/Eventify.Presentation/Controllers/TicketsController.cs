@@ -33,7 +33,7 @@ public sealed class TicketsController : ApiController
         return result.Match(onValue: Ok, onError: Problem);
     }
 
-    [HttpPut("{id:guid}")]
+    [HttpPost("{id:guid}")]
     public async Task<IActionResult> UpdateTicket(Guid id, UpdateTicketRequest request,
         CancellationToken cancellationToken)
     {

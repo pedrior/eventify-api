@@ -1,0 +1,7 @@
+POST {{base_url}}/v1/events/{{event_id}}/slug
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "slug": "awesome-event-slug"
+}

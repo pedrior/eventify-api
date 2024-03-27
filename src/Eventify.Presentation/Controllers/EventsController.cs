@@ -80,7 +80,7 @@ public sealed class EventsController : ApiController
         return result.Match(onValue: Ok, onError: Problem);
     }
 
-    [HttpPut("{id:guid}/details")]
+    [HttpPost("{id:guid}/details")]
     public async Task<IActionResult> UpdateDetails(Guid id, UpdateEventDetailsRequest request,
         CancellationToken cancellationToken)
     {
@@ -92,7 +92,7 @@ public sealed class EventsController : ApiController
         return result.Match(onValue: _ => NoContent(), onError: Problem);
     }
 
-    [HttpPut("{id:guid}/location")]
+    [HttpPost("{id:guid}/location")]
     public async Task<IActionResult> UpdateLocation(Guid id, UpdateEventLocationRequest request,
         CancellationToken cancellationToken)
     {
@@ -104,7 +104,7 @@ public sealed class EventsController : ApiController
         return result.Match(onValue: _ => NoContent(), onError: Problem);
     }
 
-    [HttpPut("{id:guid}/period")]
+    [HttpPost("{id:guid}/period")]
     public async Task<IActionResult> UpdatePeriod(Guid id, UpdateEventPeriodRequest request,
         CancellationToken cancellationToken)
     {
@@ -116,7 +116,7 @@ public sealed class EventsController : ApiController
         return result.Match(onValue: _ => NoContent(), onError: Problem);
     }
 
-    [HttpPut("{id:guid}/slug")]
+    [HttpPost("{id:guid}/slug")]
     public async Task<IActionResult> UpdateSlug(Guid id, UpdateEventSlugRequest request,
         CancellationToken cancellationToken)
     {

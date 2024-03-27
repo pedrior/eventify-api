@@ -1,4 +1,4 @@
-PUT {{base_url}}/v1/producers
+POST {{base_url}}/v1/producers
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
