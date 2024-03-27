@@ -300,6 +300,75 @@ __Expected response__
 
 <hr/>
 
+#### Get Attendee Bookings
+
+Retrieves the attendee's bookings.
+
+```http
+GET /v1/attendees/bookings?page=1&limit=10
+```
+
+__Query Parameters:__
+
+| Parameter | Type   | Description                                    | Required |
+|-----------|--------|------------------------------------------------|----------|
+| page      | int    | The number of the page to return. (Default: 1) | No       |
+| limit     | int    | The number of items per page. (Default: 10)    | No       |
+
+__Expected response__
+
+200 - OK
+
+```json
+{
+  "page": 1,
+  "limit": 10,
+  "total": 3,
+  "items": [
+    {
+      "id": "32ab6176-3917-4552-9871-b200578af019",
+      "state": "confirmed",
+      "total_price": 34.00,
+      "total_quantity": 2,
+      "placed_at": "2024-03-27T08:01:10.3849350-03:00",
+      "ticket": {
+        "id": "f7d9c5c9-1516-4a82-91b1-931db589fce0",
+        "name": "Day 4",
+        "price": 17.00
+      },
+      "event": {
+        "id": "ade2ffde-3b5f-417a-939f-b4de4baeddf8",
+        "name": ".NET Conference",
+        "start": "2024-12-01T00:00:00.0000000-03:00",
+        "end": "2024-12-03T00:00:00.0000000-03:00",
+        "location": "Centro de Convenções de João Pessoa, Rodovia PB-008, Km 5 s/n Polo Turístico - Cabo Branco, João Pessoa, PB",
+        "poster_url": "https://{storage-name}.s3.{storage-region}.amazonaws.com/events/ade2ffde-3b5f-417a-939f-b4de4baeddf8/poster"
+      }
+    },
+    {
+      "id": "bda3d3ef-44de-436f-84f6-fdc8b3a6b05e",
+      "state": "cancelled",
+      "total_price": 30.00,
+      "total_quantity": 1,
+      "placed_at": "2024-03-27T08:31:36.8563220-03:00",
+      "ticket": {
+        "id": "ada81d79-16d3-4bfe-b69e-8f75238e5c90",
+        "name": "Night VIP",
+        "price": 30.00
+      },
+      "event": {
+        "id": "ade2ffde-3b5f-417a-939f-b4de4baeddf8",
+        "name": ".NET Conference",
+        "start": "2024-12-01T00:00:00.0000000-03:00",
+        "end": "2024-12-03T00:00:00.0000000-03:00",
+        "location": "Centro de Convenções de João Pessoa, Rodovia PB-008, Km 5 s/n Polo Turístico - Cabo Branco, João Pessoa, PB",
+        "poster_url": "https://{storage-name}.s3.{storage-region}.amazonaws.com/events/ade2ffde-3b5f-417a-939f-b4de4baeddf8/poster"
+      }
+    }
+  ]
+}
+```
+
 ## :page_with_curl: License
 
 This project is licensed under the terms of the [MIT](https://github.com/pedrior/eventify-api/blob/master/LICENSE)
