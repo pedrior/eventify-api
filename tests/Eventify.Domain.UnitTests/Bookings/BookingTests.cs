@@ -91,7 +91,7 @@ public sealed class BookingTests
         var result = sut.Pay();
 
         // Assert
-        result.Should().BeError(BookingErrors.InvalidStateOperation(sut.State));
+        result.Should().BeFailure(BookingErrors.InvalidStateOperation(sut.State));
     }
     
     [Fact]
@@ -157,7 +157,7 @@ public sealed class BookingTests
         var result = sut.Cancel(CancellationReason.AttendeeRequest);
 
         // Assert
-        result.Should().BeError(BookingErrors.InvalidStateOperation(sut.State));
+        result.Should().BeFailure(BookingErrors.InvalidStateOperation(sut.State));
     }
     
     [Fact]
@@ -210,6 +210,6 @@ public sealed class BookingTests
         var result = sut.Confirm();
 
         // Assert
-        result.Should().BeError(BookingErrors.InvalidStateOperation(sut.State));
+        result.Should().BeFailure(BookingErrors.InvalidStateOperation(sut.State));
     }
 }

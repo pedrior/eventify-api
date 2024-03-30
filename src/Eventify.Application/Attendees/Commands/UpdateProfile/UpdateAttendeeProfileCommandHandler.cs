@@ -7,9 +7,9 @@ namespace Eventify.Application.Attendees.Commands.UpdateProfile;
 internal sealed class UpdateAttendeeProfileCommandHandler(
     IUser user,
     IAttendeeRepository attendeeRepository
-) : ICommandHandler<UpdateAttendeeProfileCommand, Updated>
+) : ICommandHandler<UpdateAttendeeProfileCommand, Success>
 {
-    public async Task<ErrorOr<Updated>> Handle(UpdateAttendeeProfileCommand command,
+    public async Task<Result<Success>> Handle(UpdateAttendeeProfileCommand command,
         CancellationToken cancellationToken)
     {
         var attendee = await attendeeRepository.GetByUserAsync(user.Id, cancellationToken);
@@ -22,6 +22,6 @@ internal sealed class UpdateAttendeeProfileCommandHandler(
         var contact = new AttendeeContact(attendee.Contact.Email, command.PhoneNumber);
 
         return await attendee.UpdateProfile(details, contact)
-            .ThenAsync(_ => attendeeRepository.UpdateAsync(attendee, cancellationToken));
+            .ThenAsync(() => attendeeRepository.UpdateAsync(attendee, cancellationToken));
     }
 }

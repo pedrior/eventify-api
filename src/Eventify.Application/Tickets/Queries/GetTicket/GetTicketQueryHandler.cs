@@ -7,7 +7,7 @@ namespace Eventify.Application.Tickets.Queries.GetTicket;
 internal sealed class GetTicketQueryHandler(ITicketRepository ticketRepository) 
     : IQueryHandler<GetTicketQuery, TicketResponse>
 {
-    public async Task<ErrorOr<TicketResponse>> Handle(GetTicketQuery query,
+    public async Task<Result<TicketResponse>> Handle(GetTicketQuery query,
         CancellationToken cancellationToken)
     {
         var ticket = await ticketRepository.GetAsync(query.TicketId, cancellationToken);

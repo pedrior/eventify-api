@@ -20,7 +20,7 @@ public sealed partial class ProducerTests
         var result = sut.AddEvent(@event);
 
         // Assert
-        result.Should().BeError(ProducerErrors.EventAlreadyAdded(@event.Id));
+        result.Should().BeFailure(ProducerErrors.EventAlreadyAdded(@event.Id));
     }
 
     [Fact]
@@ -48,7 +48,7 @@ public sealed partial class ProducerTests
         var result = sut.AddEvent(@event);
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -62,7 +62,7 @@ public sealed partial class ProducerTests
         var result = sut.DeleteEvent(@event);
 
         // Assert
-        result.Should().BeError(ProducerErrors.EventNotFound(@event.Id));
+        result.Should().BeFailure(ProducerErrors.EventNotFound(@event.Id));
     }
 
     [Fact]
@@ -81,7 +81,7 @@ public sealed partial class ProducerTests
         var result = sut.DeleteEvent(@event);
 
         // Assert
-        result.Should().BeError(ProducerErrors.CannotDeleteOngoingEvent(@event.Id));
+        result.Should().BeFailure(ProducerErrors.CannotDeleteOngoingEvent(@event.Id));
     }
 
     [Fact]
@@ -133,7 +133,7 @@ public sealed partial class ProducerTests
     }
 
     [Fact]
-    public void DeleteEvent_WhenEventIsDeleted_ShouldReturnDeleted()
+    public void DeleteEvent_WhenEventIsDeleted_ShouldReturnSuccess()
     {
         // Arrange
         var sut = Factories.Producer.CreateProducer();
@@ -145,7 +145,7 @@ public sealed partial class ProducerTests
         var result = sut.DeleteEvent(@event);
 
         // Assert
-        result.Should().BeValue(Result.Deleted);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -159,7 +159,7 @@ public sealed partial class ProducerTests
         var result = sut.PublishEvent(@event);
 
         // Assert
-        result.Should().BeError(ProducerErrors.EventNotFound(@event.Id));
+        result.Should().BeFailure(ProducerErrors.EventNotFound(@event.Id));
     }
     
     [Fact]
@@ -173,7 +173,7 @@ public sealed partial class ProducerTests
         var result = sut.PublishEvent(@event);
 
         // Assert
-        result.Should().BeError();
+        result.Should().BeFailure();
     }
 
     [Fact]
@@ -189,7 +189,7 @@ public sealed partial class ProducerTests
         var result = sut.PublishEvent(@event);
 
         // Assert
-        result.Should().BeError();
+        result.Should().BeFailure();
     }
 
     [Fact]
@@ -203,7 +203,7 @@ public sealed partial class ProducerTests
         var result = sut.UnpublishEvent(@event);
 
         // Assert
-        result.Should().BeError(ProducerErrors.EventNotFound(@event.Id));
+        result.Should().BeFailure(ProducerErrors.EventNotFound(@event.Id));
     }
 
     [Fact]
@@ -217,7 +217,7 @@ public sealed partial class ProducerTests
         var result = sut.UnpublishEvent(@event);
 
         // Assert
-        result.Should().BeError();
+        result.Should().BeFailure();
     }
 
     [Fact]
@@ -236,6 +236,6 @@ public sealed partial class ProducerTests
         var result = sut.UnpublishEvent(@event);
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 }

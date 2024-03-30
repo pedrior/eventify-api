@@ -26,12 +26,8 @@ internal sealed class TicketCreatedHandler(
         }
 
         var result = await @event.AddTicket(ticket)
-            .ThenAsync(_ => eventRepository.UpdateAsync(@event, cancellationToken));
+            .ThenAsync(() => eventRepository.UpdateAsync(@event, cancellationToken));
 
-        if (result.IsError)
-        {
-            throw new ApplicationException($"Error adding ticket {ticket.Id} to event {ticket.EventId}: " +
-                                           $"{result.FirstError.Description}");
-        }
+        result.EnsureSuccess();
     }
 }

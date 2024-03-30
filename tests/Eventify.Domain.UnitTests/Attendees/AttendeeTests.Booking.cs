@@ -21,7 +21,7 @@ public sealed partial class AttendeeTests
         var result = sut.AddBooking(booking);
 
         // Assert
-        result.Should().BeError(AttendeeErrors.BookingAlreadyAdded(booking.Id));
+        result.Should().BeFailure(AttendeeErrors.BookingAlreadyAdded(booking.Id));
     }
 
     [Fact]
@@ -49,7 +49,7 @@ public sealed partial class AttendeeTests
         var result = sut.AddBooking(booking);
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -63,7 +63,7 @@ public sealed partial class AttendeeTests
         var result = sut.RequestBookingCancellation(booking);
 
         // Assert
-        result.Should().BeError(AttendeeErrors.BookingNotFound(booking.Id));
+        result.Should().BeFailure(AttendeeErrors.BookingNotFound(booking.Id));
     }
 
     [Fact]
@@ -81,7 +81,7 @@ public sealed partial class AttendeeTests
         var result = sut.RequestBookingCancellation(booking);
 
         // Assert
-        result.Should().BeError(AttendeeErrors.BookingAlreadyCancelled(booking.Id));
+        result.Should().BeFailure(AttendeeErrors.BookingAlreadyCancelled(booking.Id));
     }
 
     [Fact]
@@ -113,6 +113,6 @@ public sealed partial class AttendeeTests
         var result = sut.RequestBookingCancellation(booking);
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 }

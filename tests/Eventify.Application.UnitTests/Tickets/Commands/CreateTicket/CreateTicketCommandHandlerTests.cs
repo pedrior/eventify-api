@@ -48,7 +48,7 @@ public sealed class CreateTicketCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(TicketErrors.EventNotFound(command.EventId));
+        result.Should().BeFailure(TicketErrors.EventNotFound(command.EventId));
     }
 
     [Fact]
@@ -62,7 +62,7 @@ public sealed class CreateTicketCommandHandlerTests
         }, cancellationToken);
 
         // Assert
-        result.Should().BeError();
+        result.Should().BeFailure();
     }
 
     [Fact]
@@ -91,7 +91,7 @@ public sealed class CreateTicketCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue()
+        result.Should().BeSuccess()
             .Which.Value.Should().BeOfType<TicketResponse>();
     }
 }

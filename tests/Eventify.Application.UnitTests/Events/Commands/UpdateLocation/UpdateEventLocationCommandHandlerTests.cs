@@ -42,7 +42,7 @@ public sealed class UpdateEventLocationCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(EventErrors.NotFound(command.EventId));
+        result.Should().BeFailure(EventErrors.NotFound(command.EventId));
     }
 
     [Fact]
@@ -85,7 +85,7 @@ public sealed class UpdateEventLocationCommandHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WhenLocationUpdatedSucceeds_ShouldReturnUpdated()
+    public async Task Handle_WhenLocationUpdatedSucceeds_ShouldReturnSuccess()
     {
         // Arrange
         var @event = Factories.Event.CreateEvent();
@@ -97,7 +97,7 @@ public sealed class UpdateEventLocationCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Updated);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -114,7 +114,7 @@ public sealed class UpdateEventLocationCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError();
+        result.Should().BeFailure();
     }
 
     [Fact]

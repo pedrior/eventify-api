@@ -39,7 +39,7 @@ public sealed class GetTicketQueryHandlerTests
         var result = await sut.Handle(query, cancellationToken);
 
         // Assert
-        result.Should().BeError(TicketErrors.NotFound(query.TicketId));
+        result.Should().BeFailure(TicketErrors.NotFound(query.TicketId));
     }
 
     [Fact]
@@ -55,6 +55,6 @@ public sealed class GetTicketQueryHandlerTests
         var result = await sut.Handle(query, cancellationToken);
 
         // Assert
-        result.Should().BeValue(ticket.Adapt<TicketResponse>());
+        result.Should().BeSuccess(ticket.Adapt<TicketResponse>());
     }
 }

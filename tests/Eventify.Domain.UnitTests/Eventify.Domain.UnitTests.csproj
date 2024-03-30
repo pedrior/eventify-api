@@ -12,4 +12,8 @@
         <ProjectReference Include="..\..\src\Eventify.Domain\Eventify.Domain.csproj" />
         <ProjectReference Include="..\Eventify.TestUtils\Eventify.TestUtils.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="ResultExtensions.FluentAssertionsExtensions" Version="1.0.0" />
+    </ItemGroup>
 </Project>

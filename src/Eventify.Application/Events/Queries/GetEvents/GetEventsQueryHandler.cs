@@ -10,7 +10,7 @@ internal sealed class GetEventsQueryHandler(
     IProducerRepository producerRepository
 ) : IQueryHandler<GetEventsQuery, PageResponse<EventSummaryResponse>>
 {
-    public async Task<ErrorOr<PageResponse<EventSummaryResponse>>> Handle(GetEventsQuery query,
+    public async Task<Result<PageResponse<EventSummaryResponse>>> Handle(GetEventsQuery query,
         CancellationToken cancellationToken)
     {
         var total = await eventRepository.CountPublishedAsync(query.Term, cancellationToken);

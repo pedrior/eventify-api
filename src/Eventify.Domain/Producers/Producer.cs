@@ -57,28 +57,28 @@ public sealed class Producer : Entity<ProducerId>, IAggregateRoot, IAuditable
         return producer;
     }
 
-    public ErrorOr<Updated> UpdateProfile(ProducerDetails details, ProducerContact contact, Uri? websiteUrl = null)
+    public Result<Success> UpdateProfile(ProducerDetails details, ProducerContact contact, Uri? websiteUrl = null)
     {
         Details = details;
         Contact = contact;
         WebsiteUrl = websiteUrl;
 
-        return Result.Updated;
+        return Success.Value;
     }
 
-    public ErrorOr<Success> SetPicture(Uri pictureUrl)
+    public Result<Success> SetPicture(Uri pictureUrl)
     {
         PictureUrl = pictureUrl;
-        return Result.Success;
+        return Success.Value;
     }
 
-    public ErrorOr<Deleted> RemovePicture()
+    public Result<Success> RemovePicture()
     {
         PictureUrl = null;
-        return Result.Deleted;
+        return Success.Value;
     }
 
-    public ErrorOr<Success> AddEvent(Event @event)
+    public Result<Success> AddEvent(Event @event)
     {
         if (eventIds.Contains(@event.Id))
         {
@@ -87,10 +87,10 @@ public sealed class Producer : Entity<ProducerId>, IAggregateRoot, IAuditable
 
         eventIds.Add(@event.Id);
 
-        return Result.Success;
+        return Success.Value;
     }
 
-    public ErrorOr<Deleted> DeleteEvent(Event @event)
+    public Result<Success> DeleteEvent(Event @event)
     {
         if (!eventIds.Contains(@event.Id))
         {
@@ -107,14 +107,14 @@ public sealed class Producer : Entity<ProducerId>, IAggregateRoot, IAuditable
 
         RaiseDomainEvent(new EventDeleted(@event));
 
-        return Result.Deleted;
+        return Success.Value;
     }
 
-    public ErrorOr<Success> PublishEvent(Event @event) => !eventIds.Contains(@event.Id)
+    public Result<Success> PublishEvent(Event @event) => !eventIds.Contains(@event.Id)
         ? ProducerErrors.EventNotFound(@event.Id)
         : @event.Publish();
 
-    public ErrorOr<Success> UnpublishEvent(Event @event) => !eventIds.Contains(@event.Id)
+    public Result<Success> UnpublishEvent(Event @event) => !eventIds.Contains(@event.Id)
         ? ProducerErrors.EventNotFound(@event.Id)
         : @event.Unpublish();
 }

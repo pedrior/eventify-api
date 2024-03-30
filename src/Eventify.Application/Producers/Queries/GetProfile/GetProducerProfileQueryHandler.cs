@@ -9,7 +9,7 @@ internal sealed class GetProducerProfileQueryHandler(
     IProducerRepository producerRepository
 ) : IQueryHandler<GetProducerProfileQuery, ProducerProfileResponse>
 {
-    public async Task<ErrorOr<ProducerProfileResponse>> Handle(GetProducerProfileQuery query,
+    public async Task<Result<ProducerProfileResponse>> Handle(GetProducerProfileQuery query,
         CancellationToken cancellationToken)
     {
         var producer = await producerRepository.GetByUserAsync(user.Id, cancellationToken);

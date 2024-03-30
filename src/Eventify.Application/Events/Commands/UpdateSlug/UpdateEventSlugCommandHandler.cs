@@ -8,9 +8,9 @@ namespace Eventify.Application.Events.Commands.UpdateSlug;
 internal sealed class UpdateEventSlugCommandHandler(
     IEventRepository eventRepository,
     IEventSlugUniquenessChecker eventSlugUniquenessChecker
-) : ICommandHandler<UpdateEventSlugCommand, Updated>
+) : ICommandHandler<UpdateEventSlugCommand, Success>
 {
-    public async Task<ErrorOr<Updated>> Handle(UpdateEventSlugCommand command,
+    public async Task<Result<Success>> Handle(UpdateEventSlugCommand command,
         CancellationToken cancellationToken)
     {
         var @event = await eventRepository.GetAsync(command.EventId, cancellationToken);

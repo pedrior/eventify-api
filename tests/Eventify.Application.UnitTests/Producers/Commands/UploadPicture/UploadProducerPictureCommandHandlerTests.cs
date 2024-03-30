@@ -87,7 +87,7 @@ public sealed class UploadProducerPictureCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(ProducerErrors.PictureUploadFailed);
+        result.Should().BeFailure(ProducerErrors.PictureUploadFailed);
     }
 
     [Fact]
@@ -160,6 +160,6 @@ public sealed class UploadProducerPictureCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 }

@@ -22,14 +22,13 @@ internal sealed class EventUnpublishedHandler(
     {
         foreach (var booking in await bookingRepository.ListByEventAsync(eventId, cancellationToken))
         {
-            var result = await booking.Cancel(CancellationReason.EventCancelled)
-                .ThenAsync(_ => bookingRepository.UpdateAsync(booking, cancellationToken));
-            
-            if (result.IsError)
-            {
-                logger.LogError("Error canceling booking {BookingId} for event {EventId}: {@Error}",
-                    booking.Id, eventId, result.FirstError);
-            }
+            await booking.Cancel(CancellationReason.EventCancelled)
+                .ThenAsync(() => bookingRepository.UpdateAsync(booking, cancellationToken))
+                .Else(errors =>
+                {
+                    logger.LogError("Error canceling booking {BookingId} for event {EventId}: {@Error}",
+                        booking.Id, eventId, errors[0]);
+                });
         }
     }
 }

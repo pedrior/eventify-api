@@ -2,7 +2,7 @@ using Eventify.Application.Common.Abstractions.Data;
 
 namespace Eventify.Application.Producers.Commands.CreateProfile;
 
-public sealed record CreateProducerProfileCommand : ICommand<Created>, ITransactional
+public sealed record CreateProducerProfileCommand : ICommand<Success>, ITransactional
 {
     public required string Name { get; init; }
     

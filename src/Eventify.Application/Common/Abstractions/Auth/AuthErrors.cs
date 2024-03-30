@@ -3,14 +3,14 @@ namespace Eventify.Application.Common.Abstractions.Auth;
 public static class AuthErrors
 {
     public static readonly Error InvalidCredentials = Error.Unauthorized(
-        code: "invalid_credentials",
-        description: "Invalid email or password.");
+        "Invalid email or password.",
+        code: "invalid_credentials");
 
     public static readonly Error UserNotConfirmed = Error.Unauthorized(
-        code: "user_not_confirmed",
-        description: "User is not confirmed.");
+        "User is not confirmed.",
+        code: "user_not_confirmed");
 
     public static readonly Error InvalidRefreshToken = Error.Unauthorized(
-        code: "invalid_refresh_token",
-        description: "Invalid refresh token.");
+        "Invalid refresh token.",
+        code: "invalid_refresh_token");
 }

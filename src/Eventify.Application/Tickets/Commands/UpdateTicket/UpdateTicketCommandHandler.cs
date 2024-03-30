@@ -5,9 +5,9 @@ using Eventify.Domain.Tickets.Repository;
 namespace Eventify.Application.Tickets.Commands.UpdateTicket;
 
 internal sealed class UpdateTicketCommandHandler(ITicketRepository ticketRepository) 
-    : ICommandHandler<UpdateTicketCommand, Updated>
+    : ICommandHandler<UpdateTicketCommand, Success>
 {
-    public async Task<ErrorOr<Updated>> Handle(UpdateTicketCommand command,
+    public async Task<Result<Success>> Handle(UpdateTicketCommand command,
         CancellationToken cancellationToken)
     {
         var ticket = await ticketRepository.GetAsync(command.TicketId, cancellationToken);

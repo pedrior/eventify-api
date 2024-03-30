@@ -5,9 +5,9 @@ using Eventify.Domain.Events.ValueObjects;
 namespace Eventify.Application.Events.Commands.UpdateLocation;
 
 internal sealed class UpdateEventLocationCommandHandler(IEventRepository eventRepository)
-    : ICommandHandler<UpdateEventLocationCommand, Updated>
+    : ICommandHandler<UpdateEventLocationCommand, Success>
 {
-    public async Task<ErrorOr<Updated>> Handle(UpdateEventLocationCommand command,
+    public async Task<Result<Success>> Handle(UpdateEventLocationCommand command,
         CancellationToken cancellationToken)
     {
         var @event = await eventRepository.GetAsync(command.EventId, cancellationToken);
@@ -25,6 +25,6 @@ internal sealed class UpdateEventLocationCommandHandler(IEventRepository eventRe
             country: command.Country);
         
         return await @event.UpdateLocation(location)
-            .ThenAsync(_ => eventRepository.UpdateAsync(@event, cancellationToken));
+            .ThenAsync(() => eventRepository.UpdateAsync(@event, cancellationToken));
     }
 }

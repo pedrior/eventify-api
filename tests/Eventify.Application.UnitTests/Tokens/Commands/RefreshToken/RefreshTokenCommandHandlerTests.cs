@@ -42,14 +42,14 @@ public sealed class RefreshTokenCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(authResult.Adapt<RefreshTokenResponse>());
+        result.Should().BeSuccess(authResult.Adapt<RefreshTokenResponse>());
     }
 
     [Fact]
     public async Task Handle_WhenRefreshingIsUnsuccessful_ShouldReturnError()
     {
         // Arrange
-        var error = Error.Unauthorized();
+        var error = Error.Unauthorized("Invalid refresh token.");
 
         A.CallTo(() => authService.RefreshAsync(command.UserId, command.RefreshToken))
             .Returns(error);
@@ -58,6 +58,6 @@ public sealed class RefreshTokenCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(error);
+        result.Should().BeFailure(error);
     }
 }

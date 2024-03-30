@@ -8,7 +8,7 @@ namespace Eventify.Domain.Bookings.Services;
 
 public sealed class BookingService : IBookingService
 {
-    public ErrorOr<Booking> PlaceBooking(
+    public Result<Booking> PlaceBooking(
         Event @event,
         Ticket ticket,
         Attendee attendee,

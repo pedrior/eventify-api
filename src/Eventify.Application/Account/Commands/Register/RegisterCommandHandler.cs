@@ -11,9 +11,9 @@ internal sealed class RegisterCommandHandler(
     IIdentityService identityService,
     IAttendeeRepository attendeeRepository,
     ILogger<RegisterCommandHandler> logger
-) : ICommandHandler<RegisterCommand, Created>
+) : ICommandHandler<RegisterCommand, Success>
 {
-    public async Task<ErrorOr<Created>> Handle(RegisterCommand command, CancellationToken cancellationToken)
+    public async Task<Result<Success>> Handle(RegisterCommand command, CancellationToken cancellationToken)
     {
         var result = await identityService.CreateUserAsync(command.Email, command.Password);
         return await result.ThenAsync(userId =>
@@ -31,7 +31,7 @@ internal sealed class RegisterCommandHandler(
         });
     }
 
-    private async Task<Created> CreateAttendeeAsync(
+    private async Task<Success> CreateAttendeeAsync(
         string userId,
         string email,
         string givenName,
@@ -50,6 +50,6 @@ internal sealed class RegisterCommandHandler(
         
         logger.LogInformation("Attendee user created for user {UserId}", userId);
 
-        return Result.Created;
+        return Success.Value;
     }
 }

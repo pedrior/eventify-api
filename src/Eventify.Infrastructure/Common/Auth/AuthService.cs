@@ -16,7 +16,7 @@ internal sealed class AuthService(
     IConfiguration configuration
 ) : IAuthService
 {
-    public async Task<ErrorOr<AuthResult>> SignInAsync(string email, string password)
+    public async Task<Result<AuthResult>> SignInAsync(string email, string password)
     {
         var user = await userManager.FindByEmailAsync(email);
         if (user is null)
@@ -51,7 +51,7 @@ internal sealed class AuthService(
         };
     }
 
-    public async Task<ErrorOr<AuthResult>> RefreshAsync(string userId, string refreshToken)
+    public async Task<Result<AuthResult>> RefreshAsync(string userId, string refreshToken)
     {
         var clientId = configuration["AWS:UserPoolClientId"]!;
         var clientSecret = configuration["AWS:UserPoolClientSecret"]!;

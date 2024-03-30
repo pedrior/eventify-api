@@ -28,7 +28,7 @@ public sealed partial class EventTests
         var result = sut.AddTicket(Factories.Ticket.CreateTicketValue());
 
         // Assert
-        result.Should().BeError(EventErrors.CannotModifyFinishedEvent);
+        result.Should().BeFailure(EventErrors.CannotModifyFinishedEvent);
     }
 
     [Fact]
@@ -44,7 +44,7 @@ public sealed partial class EventTests
         var result = sut.AddTicket(ticket);
 
         // Assert
-        result.Should().BeError(EventErrors.TicketAlreadyAdded(ticket.Id));
+        result.Should().BeFailure(EventErrors.TicketAlreadyAdded(ticket.Id));
     }
 
     [Fact]
@@ -59,7 +59,7 @@ public sealed partial class EventTests
         var result = sut.AddTicket(ticket);
 
         // Assert
-        result.Should().BeError(EventErrors.TicketSalePeriodExceedsEventPeriod);
+        result.Should().BeFailure(EventErrors.TicketSalePeriodExceedsEventPeriod);
     }
 
     [Fact]
@@ -77,7 +77,7 @@ public sealed partial class EventTests
         var result = sut.AddTicket(Factories.Ticket.CreateTicketValue());
 
         // Assert
-        result.Should().BeError(EventErrors.TicketLimitReached(Event.TicketsLimit));
+        result.Should().BeFailure(EventErrors.TicketLimitReached(Event.TicketsLimit));
     }
 
     [Fact]
@@ -104,7 +104,7 @@ public sealed partial class EventTests
         var result = sut.AddTicket(Factories.Ticket.CreateTicketValue());
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -126,7 +126,7 @@ public sealed partial class EventTests
         var result = sut.RemoveTicket(Factories.Ticket.CreateTicketValue());
 
         // Assert
-        result.Should().BeError(EventErrors.CannotModifyFinishedEvent);
+        result.Should().BeFailure(EventErrors.CannotModifyFinishedEvent);
     }
 
     [Fact]
@@ -140,7 +140,7 @@ public sealed partial class EventTests
         var result = sut.RemoveTicket(ticket);
 
         // Assert
-        result.Should().BeError(EventErrors.TicketNotFound(ticket.Id));
+        result.Should().BeFailure(EventErrors.TicketNotFound(ticket.Id));
     }
 
     [Fact]
@@ -176,7 +176,7 @@ public sealed partial class EventTests
     }
 
     [Fact]
-    public void RemoveTicket_WhenTicketCanBeRemoved_ShouldReturnDeleted()
+    public void RemoveTicket_WhenTicketCanBeRemoved_ShouldReturnSuccess()
     {
         // Arrange
         var sut = Factories.Event.CreateEvent();
@@ -188,6 +188,6 @@ public sealed partial class EventTests
         var result = sut.RemoveTicket(ticket);
 
         // Assert
-        result.Should().BeValue(Result.Deleted);
+        result.Should().BeSuccess(Success.Value);
     }
 }

@@ -83,7 +83,7 @@ public sealed class Event : Entity<EventId>, IAggregateRoot, IAuditable, ISoftDe
         return @event;
     }
 
-    public ErrorOr<Updated> UpdateDetails(EventDetails details)
+    public Result<Success> UpdateDetails(EventDetails details)
     {
         if (IsFinished)
         {
@@ -91,10 +91,10 @@ public sealed class Event : Entity<EventId>, IAggregateRoot, IAuditable, ISoftDe
         }
         
         Details = details;
-        return Result.Updated;
+        return Success.Value;
     }
 
-    public ErrorOr<Updated> UpdatePeriod(Period period)
+    public Result<Success> UpdatePeriod(Period period)
     {
         if (IsFinished)
         {
@@ -107,10 +107,10 @@ public sealed class Event : Entity<EventId>, IAggregateRoot, IAuditable, ISoftDe
         }
 
         Period = period;
-        return Result.Updated;
+        return Success.Value;
     }
 
-    public ErrorOr<Updated> UpdateLocation(EventLocation location)
+    public Result<Success> UpdateLocation(EventLocation location)
     {
         if (IsFinished)
         {
@@ -123,10 +123,10 @@ public sealed class Event : Entity<EventId>, IAggregateRoot, IAuditable, ISoftDe
         }
 
         Location = location;
-        return Result.Updated;
+        return Success.Value;
     }
 
-    public async Task<ErrorOr<Updated>> UpdateSlugAsync(
+    public async Task<Result<Success>> UpdateSlugAsync(
         Slug slug,
         IEventSlugUniquenessChecker uniquenessChecker,
         CancellationToken cancellationToken = default)
@@ -142,10 +142,10 @@ public sealed class Event : Entity<EventId>, IAggregateRoot, IAuditable, ISoftDe
         }
 
         Slug = slug;
-        return Result.Updated;
+        return Success.Value;
     }
 
-    public ErrorOr<Success> SetPoster(Uri posterUrl)
+    public Result<Success> SetPoster(Uri posterUrl)
     {
         if (IsFinished)
         {
@@ -153,10 +153,10 @@ public sealed class Event : Entity<EventId>, IAggregateRoot, IAuditable, ISoftDe
         }
         
         PosterUrl = posterUrl;
-        return Result.Success;
+        return Success.Value;
     }
 
-    public ErrorOr<Deleted> RemovePoster()
+    public Result<Success> RemovePoster()
     {
         if (IsFinished)
         {
@@ -164,10 +164,10 @@ public sealed class Event : Entity<EventId>, IAggregateRoot, IAuditable, ISoftDe
         }
         
         PosterUrl = null;
-        return Result.Deleted;
+        return Success.Value;
     }
 
-    public ErrorOr<Success> Publish()
+    public Result<Success> Publish()
     {
         if (!State.CanTransitionTo(EventState.Published))
         {
@@ -188,10 +188,10 @@ public sealed class Event : Entity<EventId>, IAggregateRoot, IAuditable, ISoftDe
         PublishedAt = DateTimeOffset.UtcNow;
 
         RaiseDomainEvent(new EventPublished(this));
-        return Result.Success;
+        return Success.Value;
     }
 
-    public ErrorOr<Success> Unpublish()
+    public Result<Success> Unpublish()
     {
         if (!State.CanTransitionTo(EventState.Draft))
         {
@@ -202,10 +202,10 @@ public sealed class Event : Entity<EventId>, IAggregateRoot, IAuditable, ISoftDe
         PublishedAt = null;
 
         RaiseDomainEvent(new EventUnpublished(Id));
-        return Result.Success;
+        return Success.Value;
     }
 
-    public ErrorOr<Success> AddTicket(Ticket ticket)
+    public Result<Success> AddTicket(Ticket ticket)
     {
         if (IsFinished)
         {
@@ -228,10 +228,10 @@ public sealed class Event : Entity<EventId>, IAggregateRoot, IAuditable, ISoftDe
         }
 
         ticketIds.Add(ticket.Id);
-        return Result.Success;
+        return Success.Value;
     }
 
-    public ErrorOr<Deleted> RemoveTicket(Ticket ticket)
+    public Result<Success> RemoveTicket(Ticket ticket)
     {
         if (IsFinished)
         {
@@ -245,10 +245,10 @@ public sealed class Event : Entity<EventId>, IAggregateRoot, IAuditable, ISoftDe
 
         ticketIds.Remove(ticket.Id);
         RaiseDomainEvent(new TicketRemoved(ticket));
-        return Result.Deleted;
+        return Success.Value;
     }
 
-    public ErrorOr<Success> AddBooking(Booking booking)
+    public Result<Success> AddBooking(Booking booking)
     {
         if (IsFinished)
         {
@@ -271,6 +271,6 @@ public sealed class Event : Entity<EventId>, IAggregateRoot, IAuditable, ISoftDe
         }
 
         bookingIds.Add(booking.Id);
-        return Result.Success;
+        return Success.Value;
     }
 }

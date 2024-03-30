@@ -33,7 +33,7 @@ public sealed class RegisterCommandHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WhenRegistrationIsSuccessful_ShouldReturnCreated()
+    public async Task Handle_WhenRegistrationIsSuccessful_ShouldReturnSuccess()
     {
         // Arrange
         A.CallTo(() => identityService.CreateUserAsync(command.Email, command.Password))
@@ -43,14 +43,14 @@ public sealed class RegisterCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Created);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
     public async Task Handle_WhenRegistrationIsUnsuccessful_ShouldReturnError()
     {
         // Arrange
-        var error = Error.Conflict();
+        var error = Error.Conflict("Email is already taken.");
 
         A.CallTo(() => identityService.CreateUserAsync(command.Email, command.Password))
             .Returns(error);
@@ -59,7 +59,7 @@ public sealed class RegisterCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(error);
+        result.Should().BeFailure(error);
     }
 
     [Fact]

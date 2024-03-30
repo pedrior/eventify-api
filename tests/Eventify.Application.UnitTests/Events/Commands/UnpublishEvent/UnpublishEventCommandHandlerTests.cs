@@ -47,7 +47,7 @@ public sealed class UnpublishEventCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(EventErrors.NotFound(command.EventId));
+        result.Should().BeFailure(EventErrors.NotFound(command.EventId));
     }
 
     [Fact]
@@ -78,7 +78,7 @@ public sealed class UnpublishEventCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -106,6 +106,6 @@ public sealed class UnpublishEventCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError();
+        result.Should().BeFailure();
     }
 }

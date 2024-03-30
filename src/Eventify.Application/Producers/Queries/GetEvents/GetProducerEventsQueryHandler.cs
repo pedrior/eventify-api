@@ -9,7 +9,7 @@ internal sealed class GetProducerEventsQueryHandler(
     IProducerRepository producerRepository
 ) : IQueryHandler<GetProducerEventsQuery, ProducerEventsResponse>
 {
-    public async Task<ErrorOr<ProducerEventsResponse>> Handle(GetProducerEventsQuery _,
+    public async Task<Result<ProducerEventsResponse>> Handle(GetProducerEventsQuery _,
         CancellationToken cancellationToken)
     {
         var producer = await producerRepository.GetByUserAsync(user.Id, cancellationToken);

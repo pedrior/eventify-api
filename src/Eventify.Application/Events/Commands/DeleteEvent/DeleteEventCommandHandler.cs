@@ -7,9 +7,9 @@ namespace Eventify.Application.Events.Commands.DeleteEvent;
 internal sealed class DeleteEventCommandHandler(
     IEventRepository eventRepository,
     IProducerRepository producerRepository
-) : ICommandHandler<DeleteEventCommand, Deleted>
+) : ICommandHandler<DeleteEventCommand, Success>
 {
-    public async Task<ErrorOr<Deleted>> Handle(DeleteEventCommand command,
+    public async Task<Result<Success>> Handle(DeleteEventCommand command,
         CancellationToken cancellationToken)
     {
         var @event = await eventRepository.GetAsync(command.EventId, cancellationToken);
@@ -21,7 +21,7 @@ internal sealed class DeleteEventCommandHandler(
         var producer = await producerRepository.GetAsync(@event.ProducerId, cancellationToken);
         return producer is not null
             ? await producer.DeleteEvent(@event)
-                .ThenAsync(_ => producerRepository.UpdateAsync(producer, cancellationToken))
+                .ThenAsync(() => producerRepository.UpdateAsync(producer, cancellationToken))
             : throw new ApplicationException($"Producer {@event.ProducerId} not found");
     }
 }

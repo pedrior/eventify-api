@@ -47,7 +47,7 @@ public sealed class RemoveTicketCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(TicketErrors.NotFound(command.TicketId));
+        result.Should().BeFailure(TicketErrors.NotFound(command.TicketId));
     }
 
     [Fact]
@@ -66,7 +66,7 @@ public sealed class RemoveTicketCommandHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WhenTicketRemovalSucceeds_ShouldReturnDeleted()
+    public async Task Handle_WhenTicketRemovalSucceeds_ShouldReturnSuccess()
     {
         // Arrange
         @event.AddTicket(ticket);
@@ -75,7 +75,7 @@ public sealed class RemoveTicketCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Deleted);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -100,6 +100,6 @@ public sealed class RemoveTicketCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError();
+        result.Should().BeFailure();
     }
 }

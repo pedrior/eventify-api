@@ -1,2 +1,2 @@
-global using ErrorOr;
+global using ResultExtensions;
 global using Microsoft.EntityFrameworkCore;

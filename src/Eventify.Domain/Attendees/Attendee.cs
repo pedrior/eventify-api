@@ -50,27 +50,27 @@ public sealed class Attendee : Entity<AttendeeId>, IAggregateRoot, IAuditable
         return attendee;
     }
 
-    public ErrorOr<Updated> UpdateProfile(AttendeeDetails details, AttendeeContact contact)
+    public Result<Success> UpdateProfile(AttendeeDetails details, AttendeeContact contact)
     {
         Details = details;
         Contact = contact;
 
-        return Result.Updated;
+        return Success.Value;
     }
 
-    public ErrorOr<Success> SetPicture(Uri pictureUrl)
+    public Result<Success> SetPicture(Uri pictureUrl)
     {
         PictureUrl = pictureUrl;
-        return Result.Success;
+        return Success.Value;
     }
 
-    public ErrorOr<Deleted> RemovePicture()
+    public Result<Success> RemovePicture()
     {
         PictureUrl = null;
-        return Result.Deleted;
+        return Success.Value;
     }
 
-    public ErrorOr<Success> AddBooking(Booking booking)
+    public Result<Success> AddBooking(Booking booking)
     {
         if (bookingIds.Contains(booking.Id))
         {
@@ -79,10 +79,10 @@ public sealed class Attendee : Entity<AttendeeId>, IAggregateRoot, IAuditable
 
         bookingIds.Add(booking.Id);
 
-        return Result.Success;
+        return Success.Value;
     }
 
-    public ErrorOr<Success> RequestBookingCancellation(Booking booking)
+    public Result<Success> RequestBookingCancellation(Booking booking)
     {
         if (!bookingIds.Contains(booking.Id))
         {
@@ -96,6 +96,6 @@ public sealed class Attendee : Entity<AttendeeId>, IAggregateRoot, IAuditable
 
         RaiseDomainEvent(new BookingCancellationRequested(booking.Id));
 
-        return Result.Success;
+        return Success.Value;
     }
 }

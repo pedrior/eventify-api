@@ -30,13 +30,9 @@ internal sealed class BookingPlacedHandler(
         }
 
         var result = await attendee.AddBooking(booking)
-            .ThenAsync(_ => attendeeRepository.UpdateAsync(attendee, cancellationToken));
+            .ThenAsync(() => attendeeRepository.UpdateAsync(attendee, cancellationToken));
 
-        if (result.IsError)
-        {
-            throw new ApplicationException($"Failed to add booking {booking.Id} to " +
-                                           $"attendee {booking.AttendeeId}: {result.FirstError.Description}");
-        }
+        result.EnsureSuccess();
     }
 
     private async Task ProcessBookingPaymentAsync(Booking booking, CancellationToken cancellationToken)
@@ -47,10 +43,6 @@ internal sealed class BookingPlacedHandler(
             _ => booking.Cancel(CancellationReason.PaymentFailed)
         }).ThenAsync(_ => bookingRepository.UpdateAsync(booking, cancellationToken));
 
-        if (result.IsError)
-        {
-            throw new ApplicationException(
-                $"Failed to process payment for booking {booking.Id}: {result.FirstError.Description}");
-        }
+        result.EnsureSuccess();
     }
 }

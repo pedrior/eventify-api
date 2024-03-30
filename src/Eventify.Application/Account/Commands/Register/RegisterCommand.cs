@@ -2,7 +2,7 @@ using Eventify.Application.Common.Abstractions.Data;
 
 namespace Eventify.Application.Account.Commands.Register;
 
-public sealed record RegisterCommand : ICommand<Created>, ITransactional
+public sealed record RegisterCommand : ICommand<Success>, ITransactional
 {
     public required string Email { get; init; }
 

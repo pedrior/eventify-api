@@ -105,7 +105,7 @@ public sealed class BookingPaidHandlerTests
     }
     
     [Fact]
-    public async Task Handle_WhenCancelFailedBookingFails_ShouldThrowApplicationException()
+    public async Task Handle_WhenCancelFailedBookingFails_ShouldThrowResultException()
     {
         // Arrange
         var alreadyConfirmedBooking = Factories.Booking.CreateBooking();
@@ -116,7 +116,6 @@ public sealed class BookingPaidHandlerTests
         var act = () => sut.Handle(new BookingPaid(alreadyConfirmedBooking), cancellationToken);
 
         // Assert
-        await act.Should().ThrowExactlyAsync<ApplicationException>()
-            .WithMessage($"Failed to cancel booking {booking.Id}: *");
+        await act.Should().ThrowExactlyAsync<ResultException>();
     }
 }

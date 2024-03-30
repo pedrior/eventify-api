@@ -7,9 +7,9 @@ namespace Eventify.Application.Producers.Commands.UpdateProfile;
 internal sealed class UpdateProducerProfileCommandHandler(
     IUser user,
     IProducerRepository producerRepository
-) : ICommandHandler<UpdateProducerProfileCommand, Updated>
+) : ICommandHandler<UpdateProducerProfileCommand, Success>
 {
-    public async Task<ErrorOr<Updated>> Handle(UpdateProducerProfileCommand command,
+    public async Task<Result<Success>> Handle(UpdateProducerProfileCommand command,
         CancellationToken cancellationToken)
     {
         var producer = await producerRepository.GetByUserAsync(user.Id, cancellationToken);
@@ -22,6 +22,6 @@ internal sealed class UpdateProducerProfileCommandHandler(
         var contact = new ProducerContact(command.Email, command.PhoneNumber);
 
         return await producer.UpdateProfile(details, contact, command.WebsiteUrl)
-            .ThenAsync(_ => producerRepository.UpdateAsync(producer, cancellationToken));
+            .ThenAsync(() => producerRepository.UpdateAsync(producer, cancellationToken));
     }
 }

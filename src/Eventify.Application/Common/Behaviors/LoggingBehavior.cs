@@ -6,7 +6,7 @@ internal sealed class LoggingBehavior<TRequest, TResponse>(
     ILogger<LoggingBehavior<TRequest, TResponse>> logger
 ) : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
-    where TResponse : IErrorOr
+    where TResponse : IResult
 {
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
@@ -15,7 +15,7 @@ internal sealed class LoggingBehavior<TRequest, TResponse>(
         logger.LogInformation("Handling request {RequestName}", requestName);
 
         var response = await next();
-        if (response.IsError)
+        if (response.IsFailure)
         {
             logger.LogError("Request {RequestName} failed with errors: {@Errors}", requestName, response.Errors);
         }

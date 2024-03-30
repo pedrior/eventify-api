@@ -8,16 +8,16 @@ namespace Eventify.Presentation.Controllers;
 public sealed class AccountController : ApiController
 {
     [HttpPost("login"), AllowAnonymous]
-    public async Task<IActionResult> Login(LoginRequest request, CancellationToken cancellationToken)
+    public Task<IActionResult> Login(LoginRequest request, CancellationToken cancellationToken)
     {
-        var result = await SendAsync(request.Adapt<LoginCommand>(), cancellationToken);
-        return result.Match(onValue: Ok, onError: Problem);
+        return SendAsync(request.Adapt<LoginCommand>(), cancellationToken)
+            .Ok(HttpContext);
     }
-    
+
     [HttpPost("register"), AllowAnonymous]
-    public async Task<IActionResult> Register(RegisterRequest request, CancellationToken cancellationToken)
+    public Task<IActionResult> Register(RegisterRequest request, CancellationToken cancellationToken)
     {
-        var result = await SendAsync(request.Adapt<RegisterCommand>(), cancellationToken);
-        return result.Match(onValue: _ => Created(), onError: Problem);
+        return SendAsync(request.Adapt<RegisterCommand>(), cancellationToken)
+            .Created("", HttpContext);
     }
 }

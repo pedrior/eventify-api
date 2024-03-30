@@ -9,9 +9,9 @@ internal sealed class RemoveProducerPictureCommandHandler(
     IUser user,
     IProducerRepository producerRepository,
     IStorageService storageService
-) : ICommandHandler<RemoveProducerPictureCommand, Deleted>
+) : ICommandHandler<RemoveProducerPictureCommand, Success>
 {
-    public async Task<ErrorOr<Deleted>> Handle(RemoveProducerPictureCommand command,
+    public async Task<Result<Success>> Handle(RemoveProducerPictureCommand command,
         CancellationToken cancellationToken)
     {
         var producer = await producerRepository.GetByUserAsync(user.Id, cancellationToken);
@@ -22,7 +22,7 @@ internal sealed class RemoveProducerPictureCommandHandler(
 
         if (producer.PictureUrl is null)
         {
-            return Result.Deleted;
+            return Success.Value;
         }
 
         var pictureKey = StorageKeys.ProducerPicture(producer.Id);
@@ -32,6 +32,6 @@ internal sealed class RemoveProducerPictureCommandHandler(
         }
 
         return await producer.RemovePicture()
-            .ThenAsync(_ => producerRepository.UpdateAsync(producer, cancellationToken));
+            .ThenAsync(() => producerRepository.UpdateAsync(producer, cancellationToken));
     }
 }

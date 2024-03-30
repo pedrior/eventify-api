@@ -12,49 +12,47 @@ public sealed class AttendeesController : ApiController
 {
     [HttpPost("picture")]
     [RequestSizeLimit(RequestConstants.ImageSizeLimit)]
-    public async Task<IActionResult> UploadPicture([FromForm(Name = "picture")] IFormFile picture,
+    public Task<IActionResult> UploadPicture([FromForm(Name = "picture")] IFormFile picture,
         CancellationToken cancellationToken)
     {
-        var result = await SendAsync(new UploadAttendeePictureCommand
-        {
-            Picture = new FileProxy(picture)
-        }, cancellationToken);
-
-        return result.Match(onValue: _ => NoContent(), onError: Problem);
+        return SendAsync(new UploadAttendeePictureCommand
+            {
+                Picture = new FileProxy(picture)
+            }, cancellationToken)
+            .NoContent(HttpContext);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetProfile(CancellationToken cancellationToken)
+    public Task<IActionResult> GetProfile(CancellationToken cancellationToken)
     {
-        var result = await SendAsync(new GetAttendeeProfileQuery(), cancellationToken);
-        return result.Match(onValue: Ok, onError: Problem);
+        return SendAsync(new GetAttendeeProfileQuery(), cancellationToken)
+            .Ok(HttpContext);
     }
 
     [HttpGet("bookings")]
-    public async Task<IActionResult> GetBookings([FromQuery] GetAttendeeBookingsRequest request,
+    public Task<IActionResult> GetBookings([FromQuery] GetAttendeeBookingsRequest request,
         CancellationToken cancellationToken)
     {
-        var result = await SendAsync(new GetAttendeeBookingsQuery
-        {
-            Page = request.Page,
-            Limit = request.Limit
-        }, cancellationToken);
-
-        return result.Match(onValue: Ok, onError: Problem);
+        return SendAsync(new GetAttendeeBookingsQuery
+            {
+                Page = request.Page,
+                Limit = request.Limit
+            }, cancellationToken)
+            .Ok(HttpContext);
     }
 
     [HttpPost]
-    public async Task<IActionResult> UpdateProfile(UpdateAttendeeProfileRequest request,
+    public Task<IActionResult> UpdateProfile(UpdateAttendeeProfileRequest request,
         CancellationToken cancellationToken)
     {
-        var result = await SendAsync(request.Adapt<UpdateAttendeeProfileCommand>(), cancellationToken);
-        return result.Match(onValue: _ => NoContent(), onError: Problem);
+        return SendAsync(request.Adapt<UpdateAttendeeProfileCommand>(), cancellationToken)
+            .NoContent(HttpContext);
     }
 
     [HttpDelete("picture")]
-    public async Task<IActionResult> RemovePicture(CancellationToken cancellationToken)
+    public Task<IActionResult> RemovePicture(CancellationToken cancellationToken)
     {
-        var result = await SendAsync(new RemoveAttendeePictureCommand(), cancellationToken);
-        return result.Match(onValue: _ => NoContent(), onError: Problem);
+        return SendAsync(new RemoveAttendeePictureCommand(), cancellationToken)
+            .NoContent(HttpContext);
     }
 }

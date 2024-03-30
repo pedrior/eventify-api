@@ -62,7 +62,7 @@ public sealed partial class EventTests
         var result = sut.UpdateDetails(newDetails);
 
         // Assert
-        result.Should().BeError(EventErrors.CannotModifyFinishedEvent);
+        result.Should().BeFailure(EventErrors.CannotModifyFinishedEvent);
     }
 
     [Fact]
@@ -83,7 +83,7 @@ public sealed partial class EventTests
     }
 
     [Fact]
-    public void UpdateDetails_WhenDetailsIsUpdated_ShouldReturnUpdated()
+    public void UpdateDetails_WhenDetailsIsUpdated_ShouldReturnSuccess()
     {
         // Arrange
         var sut = Factories.Event.CreateEvent();
@@ -96,7 +96,7 @@ public sealed partial class EventTests
         var result = sut.UpdateDetails(newDetails);
 
         // Assert
-        result.Should().BeValue(Result.Updated);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -113,7 +113,7 @@ public sealed partial class EventTests
         var result = sut.UpdatePeriod(newPeriod);
 
         // Assert
-        result.Should().BeError(EventErrors.CannotModifyFinishedEvent);
+        result.Should().BeFailure(EventErrors.CannotModifyFinishedEvent);
     }
 
     [Fact]
@@ -132,7 +132,7 @@ public sealed partial class EventTests
         var result = sut.UpdatePeriod(newPeriod);
 
         // Assert
-        result.Should().BeError(EventErrors.InvalidOperation(sut.State));
+        result.Should().BeFailure(EventErrors.InvalidOperation(sut.State));
     }
 
     [Fact]
@@ -152,7 +152,7 @@ public sealed partial class EventTests
     }
 
     [Fact]
-    public void UpdatePeriod_WhenEventIsNotPublished_ShouldReturnUpdated()
+    public void UpdatePeriod_WhenEventIsNotPublished_ShouldReturnSuccess()
     {
         // Arrange
         var sut = Factories.Event.CreateEvent();
@@ -164,7 +164,7 @@ public sealed partial class EventTests
         var result = sut.UpdatePeriod(newPeriod);
 
         // Assert
-        result.Should().BeValue(Result.Updated);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -185,7 +185,7 @@ public sealed partial class EventTests
         var result = sut.UpdateLocation(newLocation);
 
         // Assert
-        result.Should().BeError(EventErrors.CannotModifyFinishedEvent);
+        result.Should().BeFailure(EventErrors.CannotModifyFinishedEvent);
     }
 
     [Fact]
@@ -208,7 +208,7 @@ public sealed partial class EventTests
         var result = sut.UpdateLocation(newLocation);
 
         // Assert
-        result.Should().BeError(EventErrors.InvalidOperation(sut.State));
+        result.Should().BeFailure(EventErrors.InvalidOperation(sut.State));
     }
 
     [Fact]
@@ -232,7 +232,7 @@ public sealed partial class EventTests
     }
 
     [Fact]
-    public void UpdateLocation_WhenEventIsNotPublished_ShouldReturnUpdated()
+    public void UpdateLocation_WhenEventIsNotPublished_ShouldReturnSuccess()
     {
         // Arrange
         var sut = Factories.Event.CreateEvent();
@@ -248,7 +248,7 @@ public sealed partial class EventTests
         var result = sut.UpdateLocation(newLocation);
 
         // Assert
-        result.Should().BeValue(Result.Updated);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -265,7 +265,7 @@ public sealed partial class EventTests
         var result = await sut.UpdateSlugAsync(newSlug, uniquenessChecker);
 
         // Assert
-        result.Should().BeError(EventErrors.CannotModifyFinishedEvent);
+        result.Should().BeFailure(EventErrors.CannotModifyFinishedEvent);
     }
 
     [Fact]
@@ -285,7 +285,7 @@ public sealed partial class EventTests
         var result = await sut.UpdateSlugAsync(newSlug, uniquenessChecker);
 
         // Assert
-        result.Should().BeError(EventErrors.SlugAlreadyExists(newSlug));
+        result.Should().BeFailure(EventErrors.SlugAlreadyExists(newSlug));
     }
 
     [Fact]
@@ -309,7 +309,7 @@ public sealed partial class EventTests
     }
 
     [Fact]
-    public async Task UpdateSlugAsync_WhenSlugIsUpdated_ShouldReturnUpdated()
+    public async Task UpdateSlugAsync_WhenSlugIsUpdated_ShouldReturnSuccess()
     {
         // Arrange
         var sut = Factories.Event.CreateEvent();
@@ -325,7 +325,7 @@ public sealed partial class EventTests
         var result = await sut.UpdateSlugAsync(newSlug, uniquenessChecker);
 
         // Assert
-        result.Should().BeValue(Result.Updated);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -339,7 +339,7 @@ public sealed partial class EventTests
         var result = sut.SetPoster(posterUrl);
 
         // Assert
-        result.Should().BeError(EventErrors.CannotModifyFinishedEvent);
+        result.Should().BeFailure(EventErrors.CannotModifyFinishedEvent);
     }
 
     [Fact]
@@ -367,7 +367,7 @@ public sealed partial class EventTests
         var result = sut.SetPoster(posterUrl);
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -380,7 +380,7 @@ public sealed partial class EventTests
         var result = sut.RemovePoster();
 
         // Assert
-        result.Should().BeError(EventErrors.CannotModifyFinishedEvent);
+        result.Should().BeFailure(EventErrors.CannotModifyFinishedEvent);
     }
 
     [Fact]
@@ -399,7 +399,7 @@ public sealed partial class EventTests
     }
 
     [Fact]
-    public void RemovePoster_WhenPosterIsRemoved_ShouldReturnDeleted()
+    public void RemovePoster_WhenPosterIsRemoved_ShouldReturnSuccess()
     {
         // Arrange
         var sut = Factories.Event.CreateEvent();
@@ -410,7 +410,7 @@ public sealed partial class EventTests
         var result = sut.RemovePoster();
 
         // Assert
-        result.Should().BeValue(Result.Deleted);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -426,7 +426,7 @@ public sealed partial class EventTests
         var result = sut.Publish();
 
         // Assert
-        result.Should().BeError(EventErrors.InvalidOperation(sut.State));
+        result.Should().BeFailure(EventErrors.InvalidOperation(sut.State));
     }
 
     [Fact]
@@ -444,7 +444,7 @@ public sealed partial class EventTests
         var result = sut.Publish();
 
         // Assert
-        result.Should().BeError(EventErrors.MustBeInFuture);
+        result.Should().BeFailure(EventErrors.MustBeInFuture);
     }
 
     [Fact]
@@ -457,7 +457,7 @@ public sealed partial class EventTests
         var result = sut.Publish();
 
         // Assert
-        result.Should().BeError(EventErrors.MustHaveTicket);
+        result.Should().BeFailure(EventErrors.MustHaveTicket);
     }
 
     [Fact]
@@ -500,7 +500,7 @@ public sealed partial class EventTests
         var result = sut.Publish();
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -513,7 +513,7 @@ public sealed partial class EventTests
         var result = sut.Unpublish();
 
         // Assert
-        result.Should().BeError(EventErrors.InvalidOperation(sut.State));
+        result.Should().BeFailure(EventErrors.InvalidOperation(sut.State));
     }
 
     [Fact]
@@ -559,7 +559,7 @@ public sealed partial class EventTests
         var result = sut.Unpublish();
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 
     private static Event CreateFinishedEvent()

@@ -9,9 +9,9 @@ namespace Eventify.Application.Producers.Commands.CreateProfile;
 internal sealed class CreateProducerProfileCommandHandler(
     IUser user,
     IProducerRepository producerRepository
-) : ICommandHandler<CreateProducerProfileCommand, Created>
+) : ICommandHandler<CreateProducerProfileCommand, Success>
 {
-    public async Task<ErrorOr<Created>> Handle(CreateProducerProfileCommand command,
+    public async Task<Result<Success>> Handle(CreateProducerProfileCommand command,
         CancellationToken cancellationToken)
     {
         if (await producerRepository.ExistsByUserAsync(user.Id, cancellationToken))
@@ -31,6 +31,6 @@ internal sealed class CreateProducerProfileCommandHandler(
 
         await producerRepository.AddAsync(producer, cancellationToken);
 
-        return Result.Created;
+        return Success.Value;
     }
 }

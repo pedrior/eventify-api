@@ -6,7 +6,7 @@ namespace Eventify.Domain.Bookings.Services;
 
 public interface IBookingService
 {
-    ErrorOr<Booking> PlaceBooking(
+    Result<Booking> PlaceBooking(
         Event @event,
         Ticket ticket,
         Attendee attendee,

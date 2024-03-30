@@ -12,52 +12,54 @@ namespace Eventify.Presentation.Controllers;
 public sealed class ProducersController : ApiController
 {
     [HttpPost]
-    public async Task<IActionResult> CreateProfile(CreateProducerProfileRequest request,
+    public Task<IActionResult> CreateProfile(CreateProducerProfileRequest request,
         CancellationToken cancellationToken)
     {
-        var result = await SendAsync(request.Adapt<CreateProducerProfileCommand>(), cancellationToken);
-        return result.Match(onValue: _ => CreatedAtAction(nameof(GetProfile), value: null), onError: Problem);
+        return SendAsync(request.Adapt<CreateProducerProfileCommand>(), cancellationToken)
+            .CreateAtAction(
+                actionName: nameof(GetProfile),
+                routeValues: null,
+                context: HttpContext);
     }
 
     [HttpPost("picture")]
     [RequestSizeLimit(RequestConstants.ImageSizeLimit)]
-    public async Task<IActionResult> UpdatePicture([FromForm(Name = "picture")] IFormFile picture,
+    public Task<IActionResult> UpdatePicture([FromForm(Name = "picture")] IFormFile picture,
         CancellationToken cancellationToken)
     {
-        var result = await SendAsync(new UploadProducerPictureCommand
-        {
-            Picture = new FileProxy(picture)
-        }, cancellationToken);
-
-        return result.Match(onValue: _ => NoContent(), onError: Problem);
+        return SendAsync(new UploadProducerPictureCommand
+            {
+                Picture = new FileProxy(picture)
+            }, cancellationToken)
+            .NoContent(HttpContext);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetProfile(CancellationToken cancellationToken)
+    public Task<IActionResult> GetProfile(CancellationToken cancellationToken)
     {
-        var result = await SendAsync(new GetProducerProfileQuery(), cancellationToken);
-        return result.Match(onValue: Ok, onError: Problem);
+        return SendAsync(new GetProducerProfileQuery(), cancellationToken)
+            .Ok(HttpContext);
     }
 
     [HttpGet("events")]
-    public async Task<IActionResult> GetEvents(CancellationToken cancellationToken)
+    public Task<IActionResult> GetEvents(CancellationToken cancellationToken)
     {
-        var result = await SendAsync(new GetProducerEventsQuery(), cancellationToken);
-        return result.Match(onValue: Ok, onError: Problem);
+        return SendAsync(new GetProducerEventsQuery(), cancellationToken)
+            .Ok(HttpContext);
     }
 
     [HttpPost]
-    public async Task<IActionResult> UpdateProfile(UpdateProducerProfileRequest request,
+    public Task<IActionResult> UpdateProfile(UpdateProducerProfileRequest request,
         CancellationToken cancellationToken)
     {
-        var result = await SendAsync(request.Adapt<UpdateProducerProfileCommand>(), cancellationToken);
-        return result.Match(onValue: _ => NoContent(), onError: Problem);
+        return SendAsync(request.Adapt<UpdateProducerProfileCommand>(), cancellationToken)
+            .NoContent(HttpContext);
     }
 
     [HttpDelete("picture")]
-    public async Task<IActionResult> RemovePicture(CancellationToken cancellationToken)
+    public Task<IActionResult> RemovePicture(CancellationToken cancellationToken)
     {
-        var result = await SendAsync(new RemoveProducerPictureCommand(), cancellationToken);
-        return result.Match(onValue: _ => NoContent(), onError: Problem);
+        return SendAsync(new RemoveProducerPictureCommand(), cancellationToken)
+            .NoContent(HttpContext);
     }
 }

@@ -3,15 +3,15 @@ namespace Eventify.Application.Producers.Common.Errors;
 internal static class ProducerErrors
 {
     public static readonly Error ProfileAlreadyCreated = Error.Conflict(
-        code: "producer.profile_already_created",
-        description: "The producer profile already exists");
+        "The producer profile already exists",
+        code: "producer.profile_already_created");
     
     public static readonly Error PictureUploadFailed = Error.Failure(
-        code: "producer.picture_upload_failed",
-        description: "An error occurred while uploading the producer profile picture");
+        "An error occurred while uploading the producer profile picture",
+        code: "producer.picture_upload_failed");
 
     public static readonly Error PictureDeletionFailed = Error.Failure(
-        code: "producer.picture_deletion_failed",
-        description: "An error occurred while deleting the producer profile picture");
+        "An error occurred while deleting the producer profile picture",
+        code: "producer.picture_deletion_failed");
     
 }

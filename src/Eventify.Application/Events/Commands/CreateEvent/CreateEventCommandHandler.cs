@@ -17,7 +17,7 @@ internal sealed class CreateEventCommandHandler(
     IEventRepository eventRepository
 ) : ICommandHandler<CreateEventCommand, EventEditResponse>
 {
-    public async Task<ErrorOr<EventEditResponse>> Handle(CreateEventCommand command,
+    public async Task<Result<EventEditResponse>> Handle(CreateEventCommand command,
         CancellationToken cancellationToken)
     {
         var producer = await producerRepository.GetByUserAsync(user.Id, cancellationToken);

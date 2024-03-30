@@ -47,18 +47,18 @@ public sealed class UpdateTicketCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(TicketErrors.NotFound(command.TicketId));
+        result.Should().BeFailure(TicketErrors.NotFound(command.TicketId));
     }
 
     [Fact]
-    public async Task Handle_WhenTicketUpdateSucceeds_ShouldReturnUpdated()
+    public async Task Handle_WhenTicketUpdateSucceeds_ShouldReturnSuccess()
     {
         // Arrange
         // Act
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Updated);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -84,6 +84,6 @@ public sealed class UpdateTicketCommandHandlerTests
         }, cancellationToken);
 
         // Assert
-        result.Should().BeError();
+        result.Should().BeFailure();
     }
 }

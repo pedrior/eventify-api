@@ -16,7 +16,7 @@ public sealed class TicketTests
         var result = Factories.Ticket.CreateTicket(quantityPerSale: Quantity.Zero);
 
         // Assert
-        result.Should().BeError(TicketErrors.QuantityPerSaleMustBeAtLeastOne);
+        result.Should().BeFailure(TicketErrors.QuantityPerSaleMustBeAtLeastOne);
     }
 
     [Fact]
@@ -44,7 +44,7 @@ public sealed class TicketTests
             quantityPerSale: Quantity.Zero);
 
         // Assert
-        result.Should().BeError(TicketErrors.QuantityPerSaleMustBeAtLeastOne);
+        result.Should().BeFailure(TicketErrors.QuantityPerSaleMustBeAtLeastOne);
     }
 
     [Fact]
@@ -63,7 +63,7 @@ public sealed class TicketTests
             quantityPerSale: Constants.Ticket.QuantityPerSale);
 
         // Assert
-        result.Should().BeError(TicketErrors.QuantityMustBeGreaterThanQuantitySold(sut.QuantitySold));
+        result.Should().BeFailure(TicketErrors.QuantityMustBeGreaterThanQuantitySold(sut.QuantitySold));
     }
 
     [Fact]
@@ -93,7 +93,7 @@ public sealed class TicketTests
     }
 
     [Fact]
-    public void Update_WhenUpdated_ShouldReturnUpdated()
+    public void Update_WhenUpdated_ShouldReturnSuccess()
     {
         // Arrange
         var sut = Factories.Ticket.CreateTicketValue();
@@ -106,7 +106,7 @@ public sealed class TicketTests
             quantityPerSale: Constants.Ticket.QuantityPerSale);
 
         // Assert
-        result.Should().BeValue(Result.Updated);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -158,7 +158,7 @@ public sealed class TicketTests
         var result = sut.Sell();
 
         // Assert
-        result.Should().BeError(TicketErrors.SoldOut);
+        result.Should().BeFailure(TicketErrors.SoldOut);
     }
 
     [Fact]
@@ -171,7 +171,7 @@ public sealed class TicketTests
         var result = sut.Sell();
 
         // Assert
-        result.Should().BeError(TicketErrors.NotInSalePeriod(sut.SaleStart, sut.SaleEnd));
+        result.Should().BeFailure(TicketErrors.NotInSalePeriod(sut.SaleStart, sut.SaleEnd));
     }
 
     [Fact]
@@ -197,7 +197,7 @@ public sealed class TicketTests
         var result = sut.Sell();
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -210,7 +210,7 @@ public sealed class TicketTests
         var result = sut.CancelSale();
 
         // Assert
-        result.Should().BeError(TicketErrors.NoSaleToCancel);
+        result.Should().BeFailure(TicketErrors.NoSaleToCancel);
     }
 
     [Fact]
@@ -238,6 +238,6 @@ public sealed class TicketTests
         var result = sut.CancelSale();
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 }

@@ -47,7 +47,7 @@ public sealed class DeleteEventCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(EventErrors.NotFound(command.EventId));
+        result.Should().BeFailure(EventErrors.NotFound(command.EventId));
     }
 
     [Fact]
@@ -66,7 +66,7 @@ public sealed class DeleteEventCommandHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WhenDeletionSucceeds_ShouldReturnDeleted()
+    public async Task Handle_WhenDeletionSucceeds_ShouldReturnSuccess()
     {
         // Arrange
         producer.AddEvent(@event);
@@ -75,7 +75,7 @@ public sealed class DeleteEventCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Deleted);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -100,6 +100,6 @@ public sealed class DeleteEventCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError();
+        result.Should().BeFailure();
     }
 }

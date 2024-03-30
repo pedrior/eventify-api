@@ -9,7 +9,7 @@ internal sealed class GetAttendeeProfileQueryHandler(
     IAttendeeRepository attendeeRepository
 ) : IQueryHandler<GetAttendeeProfileQuery, AttendeeProfileResponse>
 {
-    public async Task<ErrorOr<AttendeeProfileResponse>> Handle(GetAttendeeProfileQuery query,
+    public async Task<Result<AttendeeProfileResponse>> Handle(GetAttendeeProfileQuery query,
         CancellationToken cancellationToken)
     {
         var attendee = await attendeeRepository.GetByUserAsync(user.Id, cancellationToken);

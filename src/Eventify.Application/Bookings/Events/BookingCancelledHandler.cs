@@ -30,12 +30,8 @@ internal sealed class BookingCancelledHandler(
         }
 
         var result = await ticket.CancelSale()
-            .ThenAsync(_ => ticketRepository.UpdateAsync(ticket, cancellationToken));
+            .ThenAsync(() => ticketRepository.UpdateAsync(ticket, cancellationToken));
 
-        if (result.IsError)
-        {
-            throw new ApplicationException($"Failed to cancel ticket ({booking.TicketId}) sale: " +
-                                           $"{result.FirstError.Description}");
-        }
+        result.EnsureSuccess();
     }
 }

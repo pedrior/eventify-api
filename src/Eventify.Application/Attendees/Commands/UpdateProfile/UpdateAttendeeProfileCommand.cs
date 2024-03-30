@@ -2,7 +2,7 @@ using Eventify.Application.Common.Abstractions.Data;
 
 namespace Eventify.Application.Attendees.Commands.UpdateProfile;
 
-public sealed record UpdateAttendeeProfileCommand : ICommand<Updated>, ITransactional
+public sealed record UpdateAttendeeProfileCommand : ICommand<Success>, ITransactional
 {
     public required string GivenName { get; init; }
 

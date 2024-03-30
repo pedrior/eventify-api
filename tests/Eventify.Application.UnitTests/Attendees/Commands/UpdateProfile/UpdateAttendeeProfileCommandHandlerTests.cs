@@ -82,7 +82,7 @@ public sealed class UpdateAttendeeProfileCommandHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WhenAttendeeExists_ShouldReturnUpdated()
+    public async Task Handle_WhenAttendeeExists_ShouldReturnSuccess()
     {
         // Arrange
         var attendee = Factories.Attendee.CreateAttendee();
@@ -94,6 +94,6 @@ public sealed class UpdateAttendeeProfileCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Updated);
+        result.Should().BeSuccess(Success.Value);
     }
 }

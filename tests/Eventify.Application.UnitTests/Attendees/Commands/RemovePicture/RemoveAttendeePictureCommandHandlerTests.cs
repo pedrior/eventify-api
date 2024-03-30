@@ -44,7 +44,7 @@ public sealed class RemoveAttendeePictureCommandHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WhenAttendeeDoesNotHavePicture_ShouldReturnDeleted()
+    public async Task Handle_WhenAttendeeDoesNotHavePicture_ShouldReturnSuccess()
     {
         // Arrange
         var attendee = Factories.Attendee.CreateAttendee();
@@ -56,7 +56,7 @@ public sealed class RemoveAttendeePictureCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Deleted);
+        result.Should().BeSuccess(Success.Value);
 
         A.CallTo(() => storageService.DeleteAsync(A<Uri>._, cancellationToken))
             .MustNotHaveHappened();
@@ -102,7 +102,7 @@ public sealed class RemoveAttendeePictureCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(AttendeeErrors.PictureDeletionFailed);
+        result.Should().BeFailure(AttendeeErrors.PictureDeletionFailed);
     }
 
     [Fact]
