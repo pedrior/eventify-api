@@ -64,7 +64,7 @@ public sealed class GetEventsQueryHandlerTests
         var result = await sut.Handle(query, cancellationToken);
 
         // Assert
-        result.Should().BeValue()
+        result.Should().BeSuccess()
             .Which.Value.Should().BeEquivalentTo(new
             {
                 query.Page,

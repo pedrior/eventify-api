@@ -5,9 +5,9 @@ using Eventify.Domain.Events.Repository;
 namespace Eventify.Application.Events.Commands.UpdatePeriod;
 
 internal sealed class UpdateEventPeriodCommandHandler(IEventRepository eventRepository)
-    : ICommandHandler<UpdateEventPeriodCommand, Updated>
+    : ICommandHandler<UpdateEventPeriodCommand, Success>
 {
-    public async Task<ErrorOr<Updated>> Handle(UpdateEventPeriodCommand command,
+    public async Task<Result<Success>> Handle(UpdateEventPeriodCommand command,
         CancellationToken cancellationToken)
     {
         var @event = await eventRepository.GetAsync(command.EventId, cancellationToken);
@@ -19,6 +19,6 @@ internal sealed class UpdateEventPeriodCommandHandler(IEventRepository eventRepo
         var period = new Period(command.Start, command.End);
 
         return await @event.UpdatePeriod(period)
-            .ThenAsync(_ => eventRepository.UpdateAsync(@event, cancellationToken));
+            .ThenAsync(() => eventRepository.UpdateAsync(@event, cancellationToken));
     }
 }

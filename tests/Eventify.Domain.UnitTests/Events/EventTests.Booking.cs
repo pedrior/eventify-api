@@ -18,7 +18,7 @@ public sealed partial class EventTests
         var result = sut.AddBooking(booking);
 
         // Assert
-        result.Should().BeError(EventErrors.InvalidOperation(sut.State));
+        result.Should().BeFailure(EventErrors.InvalidOperation(sut.State));
     }
 
     [Fact]
@@ -37,7 +37,7 @@ public sealed partial class EventTests
         var result = sut.AddBooking(booking);
 
         // Assert
-        result.Should().BeError(EventErrors.BookingAlreadyAdded(booking.Id));
+        result.Should().BeFailure(EventErrors.BookingAlreadyAdded(booking.Id));
     }
 
     [Fact]
@@ -56,7 +56,7 @@ public sealed partial class EventTests
         var result = sut.AddBooking(booking);
 
         // Assert
-        result.Should().BeError(EventErrors.TicketNotFound(booking.TicketId));
+        result.Should().BeFailure(EventErrors.TicketNotFound(booking.TicketId));
     }
 
     [Fact]
@@ -92,6 +92,6 @@ public sealed partial class EventTests
         var result = sut.AddBooking(booking);
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 }

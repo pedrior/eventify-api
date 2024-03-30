@@ -2,7 +2,7 @@ namespace Eventify.Application.Common.Abstractions.Identity;
 
 public interface IIdentityService
 {
-    Task<ErrorOr<string>> CreateUserAsync(string email, string password);
+    Task<Result<string>> CreateUserAsync(string email, string password);
 
     Task AddUserToRoleAsync(string userId, string role);
 

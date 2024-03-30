@@ -67,7 +67,7 @@ public sealed class GetEventQueryHandlerTest
         var result = await sut.Handle(idQuery, cancellationToken);
 
         // Assert
-        result.Should().BeError(EventErrors.NotFound(new EventId(Guid.Parse(idQuery.IdOrSlug))));
+        result.Should().BeFailure(EventErrors.NotFound(new EventId(Guid.Parse(idQuery.IdOrSlug))));
     }
 
     [Fact]
@@ -81,7 +81,7 @@ public sealed class GetEventQueryHandlerTest
         var result = await sut.Handle(query, cancellationToken);
 
         // Assert
-        result.Should().BeError(EventErrors.NotFound(new Slug(query.IdOrSlug)));
+        result.Should().BeFailure(EventErrors.NotFound(new Slug(query.IdOrSlug)));
     }
 
     [Fact]
@@ -106,7 +106,7 @@ public sealed class GetEventQueryHandlerTest
         var result = await sut.Handle(query, cancellationToken);
 
         // Assert
-        result.Should().BeValue()
+        result.Should().BeSuccess()
             .Which.Value.Should().BeEquivalentTo(@event.Adapt<EventResponse>() with
             {
                 Producer = new EventProducerResponse

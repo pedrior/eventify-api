@@ -84,7 +84,7 @@ public sealed class UpdateProducerProfileCommandHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WhenProducerExists_ShouldReturnUpdated()
+    public async Task Handle_WhenProducerExists_ShouldReturnSuccess()
     {
         // Arrange
         var producer = Factories.Producer.CreateProducer();
@@ -96,6 +96,6 @@ public sealed class UpdateProducerProfileCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Updated);
+        result.Should().BeSuccess(Success.Value);
     }
 }

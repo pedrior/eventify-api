@@ -13,7 +13,7 @@ internal sealed class IdentityService(
     ILogger<IdentityService> logger
 ) : IIdentityService
 {
-    public async Task<ErrorOr<string>> CreateUserAsync(string email, string password)
+    public async Task<Result<string>> CreateUserAsync(string email, string password)
     {
         if (await userManager.FindByEmailAsync(email) is not null)
         {

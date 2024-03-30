@@ -2,7 +2,7 @@ using Eventify.Application.Common.Abstractions.Data;
 
 namespace Eventify.Application.Producers.Commands.UpdateProfile;
 
-public class UpdateProducerProfileCommand : ICommand<Updated>, ITransactional
+public class UpdateProducerProfileCommand : ICommand<Success>, ITransactional
 {
     public required string Name { get; init; }
     

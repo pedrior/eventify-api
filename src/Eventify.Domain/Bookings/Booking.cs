@@ -68,21 +68,21 @@ public sealed class Booking : Entity<BookingId>, IAggregateRoot, ISoftDelete
         return booking;
     }
 
-    public ErrorOr<Success> Pay() => TransitionTo(BookingState.Paid, () =>
+    public Result<Success> Pay() => TransitionTo(BookingState.Paid, () =>
     {
         PaidAt = DateTimeOffset.UtcNow;
 
         RaiseDomainEvent(new BookingPaid(this));
     });
 
-    public ErrorOr<Success> Confirm() => TransitionTo(BookingState.Confirmed, () =>
+    public Result<Success> Confirm() => TransitionTo(BookingState.Confirmed, () =>
     {
         ConfirmedAt = DateTimeOffset.UtcNow;
 
         RaiseDomainEvent(new BookingConfirmed(this));
     });
 
-    public ErrorOr<Success> Cancel(CancellationReason reason) => TransitionTo(BookingState.Cancelled, () =>
+    public Result<Success> Cancel(CancellationReason reason) => TransitionTo(BookingState.Cancelled, () =>
     {
         CancellationReason = reason;
         CancelledAt = DateTimeOffset.UtcNow;
@@ -90,7 +90,7 @@ public sealed class Booking : Entity<BookingId>, IAggregateRoot, ISoftDelete
         RaiseDomainEvent(new BookingCancelled(this, reason));
     });
 
-    private ErrorOr<Success> TransitionTo(BookingState next, Action action)
+    private Result<Success> TransitionTo(BookingState next, Action action)
     {
         if (!State.CanTransitionTo(next))
         {
@@ -100,6 +100,6 @@ public sealed class Booking : Entity<BookingId>, IAggregateRoot, ISoftDelete
         action();
         State = next;
 
-        return Result.Success;
+        return Success.Value;
     }
 }

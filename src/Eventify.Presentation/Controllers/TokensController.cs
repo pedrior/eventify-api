@@ -7,9 +7,9 @@ namespace Eventify.Presentation.Controllers;
 public sealed class TokensController : ApiController
 {
     [HttpPost("refresh"), AllowAnonymous]
-    public async Task<IActionResult> RefreshToken(RefreshTokenRequest request, CancellationToken cancellationToken)
+    public Task<IActionResult> RefreshToken(RefreshTokenRequest request, CancellationToken cancellationToken)
     {
-        var result = await SendAsync(request.Adapt<RefreshTokenCommand>(), cancellationToken);
-        return result.Match(onValue: Ok, onError: Problem);
+        return SendAsync(request.Adapt<RefreshTokenCommand>(), cancellationToken)
+            .Ok(HttpContext);
     }
 }

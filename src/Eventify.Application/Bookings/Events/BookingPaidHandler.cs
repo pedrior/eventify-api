@@ -30,21 +30,15 @@ internal sealed class BookingPaidHandler(
 
         await ticket.Sell()
             .Then(_ => booking.Confirm())
-            .ThenAsync(_ => bookingRepository.UpdateAsync(booking, cancellationToken))
-            .ElseAsync(async errors =>
+            .ThenAsync(() => bookingRepository.UpdateAsync(booking, cancellationToken))
+            .ElseAsync(async () =>
             {
                 logger.LogInformation("Cancelling booking {BookingId} due to confirmation failure", booking.Id);
 
                 var result = await booking.Cancel(CancellationReason.TicketUnavailable)
-                    .ThenAsync(_ => bookingRepository.UpdateAsync(booking, cancellationToken));
+                    .ThenAsync(() => bookingRepository.UpdateAsync(booking, cancellationToken));
 
-                if (result.IsError)
-                {
-                    throw new ApplicationException($"Failed to cancel booking {booking.Id}: " +
-                                                   $"{result.FirstError.Description}");
-                }
-
-                return errors;
+                result.EnsureSuccess();
             });
     }
 }

@@ -9,7 +9,7 @@ internal sealed class UploadPosterCommandHandler(
     IStorageService storageService
 ) : ICommandHandler<UploadPosterCommand, Success>
 {
-    public async Task<ErrorOr<Success>> Handle(UploadPosterCommand command,
+    public async Task<Result<Success>> Handle(UploadPosterCommand command,
         CancellationToken cancellationToken)
     {
         var @event = await eventRepository.GetAsync(command.EventId, cancellationToken);
@@ -32,6 +32,6 @@ internal sealed class UploadPosterCommandHandler(
 
         await eventRepository.UpdateAsync(@event, cancellationToken);
 
-        return Result.Success;
+        return Success.Value;
     }
 }

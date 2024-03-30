@@ -6,7 +6,7 @@ namespace Eventify.Application.Tokens.Commands.RefreshToken;
 internal sealed class RefreshTokenCommandHandler(IAuthService authService)
     : ICommandHandler<RefreshTokenCommand, RefreshTokenResponse>
 {
-    public async Task<ErrorOr<RefreshTokenResponse>> Handle(RefreshTokenCommand command,
+    public async Task<Result<RefreshTokenResponse>> Handle(RefreshTokenCommand command,
         CancellationToken cancellationToken)
     {
         var result = await authService.RefreshAsync(command.UserId, command.RefreshToken);

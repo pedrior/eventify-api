@@ -44,7 +44,7 @@ public sealed class CreateProducerProfileCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(ProducerErrors.ProfileAlreadyCreated);
+        result.Should().BeFailure(ProducerErrors.ProfileAlreadyCreated);
     }
 
     [Fact]
@@ -70,7 +70,7 @@ public sealed class CreateProducerProfileCommandHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WhenProducerProfileIsCreated_ShouldReturnCreated()
+    public async Task Handle_WhenProducerProfileIsCreated_ShouldReturnSuccess()
     {
         // Arrange
         A.CallTo(() => producerRepository.ExistsByUserAsync(user.Id, cancellationToken))
@@ -80,6 +80,6 @@ public sealed class CreateProducerProfileCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Created);
+        result.Should().BeSuccess(Success.Value);
     }
 }

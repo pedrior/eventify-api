@@ -44,7 +44,7 @@ public sealed class RemoveProducerPictureCommandHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WhenProducerDoesNotHavePicture_ShouldReturnDeleted()
+    public async Task Handle_WhenProducerDoesNotHavePicture_ShouldReturnSuccess()
     {
         // Arrange
         var producer = Factories.Producer.CreateProducer();
@@ -56,7 +56,7 @@ public sealed class RemoveProducerPictureCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Deleted);
+        result.Should().BeSuccess(Success.Value);
 
         A.CallTo(() => storageService.DeleteAsync(A<Uri>._, cancellationToken))
             .MustNotHaveHappened();
@@ -102,7 +102,7 @@ public sealed class RemoveProducerPictureCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(ProducerErrors.PictureDeletionFailed);
+        result.Should().BeFailure(ProducerErrors.PictureDeletionFailed);
     }
 
     [Fact]

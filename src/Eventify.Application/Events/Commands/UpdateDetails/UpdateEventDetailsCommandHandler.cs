@@ -7,9 +7,9 @@ using Eventify.Domain.Events.ValueObjects;
 namespace Eventify.Application.Events.Commands.UpdateDetails;
 
 internal sealed class UpdateEventDetailsCommandHandler(IEventRepository eventRepository)
-    : ICommandHandler<UpdateEventDetailsCommand, Updated>
+    : ICommandHandler<UpdateEventDetailsCommand, Success>
 {
-    public async Task<ErrorOr<Updated>> Handle(UpdateEventDetailsCommand command,
+    public async Task<Result<Success>> Handle(UpdateEventDetailsCommand command,
         CancellationToken cancellationToken)
     {
         var @event = await eventRepository.GetAsync(command.EventId, cancellationToken);
@@ -25,6 +25,6 @@ internal sealed class UpdateEventDetailsCommandHandler(IEventRepository eventRep
             language: Language.FromName(command.Language));
 
         return await @event.UpdateDetails(details)
-            .ThenAsync(_ => eventRepository.UpdateAsync(@event, cancellationToken));
+            .ThenAsync(() => eventRepository.UpdateAsync(@event, cancellationToken));
     }
 }

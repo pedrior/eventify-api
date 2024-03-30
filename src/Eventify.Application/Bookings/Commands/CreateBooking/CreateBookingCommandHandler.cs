@@ -18,7 +18,7 @@ internal sealed class CreateBookingCommandHandler(
     IBookingService bookingService
 ) : ICommandHandler<CreateBookingCommand, BookingResponse>
 {
-    public async Task<ErrorOr<BookingResponse>> Handle(CreateBookingCommand command,
+    public async Task<Result<BookingResponse>> Handle(CreateBookingCommand command,
         CancellationToken cancellationToken)
     {
         var ticket = await ticketRepository.GetAsync(command.TicketId, cancellationToken);

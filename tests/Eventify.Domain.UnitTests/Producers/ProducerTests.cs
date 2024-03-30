@@ -61,7 +61,7 @@ public sealed partial class ProducerTests
         var result = sut.SetPicture(newPictureUrl);
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -80,7 +80,7 @@ public sealed partial class ProducerTests
     }
 
     [Fact]
-    public void RemovePicture_WhenCalled_ShouldReturnDeleted()
+    public void RemovePicture_WhenCalled_ShouldReturnSuccess()
     {
         // Arrange
         var sut = Factories.Producer.CreateProducer();
@@ -91,6 +91,6 @@ public sealed partial class ProducerTests
         var result = sut.RemovePicture();
 
         // Assert
-        result.Should().BeValue(Result.Deleted);
+        result.Should().BeSuccess(Success.Value);
     }
 }

@@ -14,11 +14,11 @@ internal sealed class GetEventQueryHandler(
     ITicketRepository ticketRepository
 ) : IQueryHandler<GetEventQuery, EventResponse>
 {
-    public async Task<ErrorOr<EventResponse>> Handle(GetEventQuery query,
+    public async Task<Result<EventResponse>> Handle(GetEventQuery query,
         CancellationToken cancellationToken)
     {
         var eventResult = await GetEventAsync(query.IdOrSlug, cancellationToken);
-        if (eventResult.IsError)
+        if (eventResult.IsFailure)
         {
             return eventResult.Errors;
         }
@@ -60,7 +60,7 @@ internal sealed class GetEventQueryHandler(
         };
     }
 
-    private async Task<ErrorOr<Event>> GetEventAsync(string idOrSlug, CancellationToken cancellationToken)
+    private async Task<Result<Event>> GetEventAsync(string idOrSlug, CancellationToken cancellationToken)
     {
         if (Guid.TryParse(idOrSlug, out var id))
         {

@@ -13,7 +13,7 @@ internal sealed class CreateTicketCommandHandler(
     IEventRepository eventRepository
 ) : ICommandHandler<CreateTicketCommand, TicketResponse>
 {
-    public async Task<ErrorOr<TicketResponse>> Handle(CreateTicketCommand command,
+    public async Task<Result<TicketResponse>> Handle(CreateTicketCommand command,
         CancellationToken cancellationToken)
     {
         if (!await eventRepository.ExistsAsync(command.EventId, cancellationToken))

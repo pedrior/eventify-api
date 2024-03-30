@@ -2,7 +2,7 @@ using Eventify.Application.Common.Abstractions.Data;
 
 namespace Eventify.Application.Events.Commands.UpdateLocation;
 
-public sealed record UpdateEventLocationCommand : ICommand<Updated>, ITransactional
+public sealed record UpdateEventLocationCommand : ICommand<Success>, ITransactional
 {
     public required Guid EventId { get; init; }
 

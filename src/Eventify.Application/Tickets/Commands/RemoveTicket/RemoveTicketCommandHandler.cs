@@ -7,9 +7,9 @@ namespace Eventify.Application.Tickets.Commands.RemoveTicket;
 internal sealed class RemoveTicketCommandHandler(
     IEventRepository eventRepository,
     ITicketRepository ticketRepository)
-    : ICommandHandler<RemoveTicketCommand, Deleted>
+    : ICommandHandler<RemoveTicketCommand, Success>
 {
-    public async Task<ErrorOr<Deleted>> Handle(RemoveTicketCommand command,
+    public async Task<Result<Success>> Handle(RemoveTicketCommand command,
         CancellationToken cancellationToken)
     {
         var ticket = await ticketRepository.GetAsync(command.TicketId, cancellationToken);
@@ -25,6 +25,6 @@ internal sealed class RemoveTicketCommandHandler(
         }
 
         return await @event.RemoveTicket(ticket)
-            .ThenAsync(_ => eventRepository.UpdateAsync(@event, cancellationToken));
+            .ThenAsync(() => eventRepository.UpdateAsync(@event, cancellationToken));
     }
 }

@@ -60,7 +60,7 @@ public sealed class GetBookingQueryHandlerTests
         var result = await sut.Handle(query, cancellationToken);
 
         // Assert
-        result.Should().BeError(BookingErrors.NotFound(query.BookingId));
+        result.Should().BeFailure(BookingErrors.NotFound(query.BookingId));
     }
 
     [Fact]
@@ -101,7 +101,7 @@ public sealed class GetBookingQueryHandlerTests
         var result = await sut.Handle(query, cancellationToken);
 
         // Assert
-        result.Should().BeValue(booking.Adapt<BookingResponse>() with
+        result.Should().BeSuccess(booking.Adapt<BookingResponse>() with
         {
             Event = new BookingEventResponse
             {

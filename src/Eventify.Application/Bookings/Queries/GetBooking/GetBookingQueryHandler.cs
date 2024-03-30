@@ -12,7 +12,7 @@ internal sealed class GetBookingQueryHandler(
     ITicketRepository ticketRepository
 ) : IQueryHandler<GetBookingQuery, BookingResponse>
 {
-    public async Task<ErrorOr<BookingResponse>> Handle(GetBookingQuery query,
+    public async Task<Result<BookingResponse>> Handle(GetBookingQuery query,
         CancellationToken cancellationToken)
     {
         var booking = await bookingRepository.GetAsync(query.BookingId, cancellationToken);

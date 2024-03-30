@@ -9,7 +9,7 @@ internal sealed class PublishEventCommandHandler(
     IProducerRepository producerRepository
 ) : ICommandHandler<PublishEventCommand, Success>
 {
-    public async Task<ErrorOr<Success>> Handle(PublishEventCommand command,
+    public async Task<Result<Success>> Handle(PublishEventCommand command,
         CancellationToken cancellationToken)
     {
         var @event = await eventRepository.GetAsync(command.EventId, cancellationToken);
@@ -21,7 +21,7 @@ internal sealed class PublishEventCommandHandler(
         var producer = await producerRepository.GetAsync(@event.ProducerId, cancellationToken);
         return producer is not null
             ? await producer.PublishEvent(@event)
-                .ThenAsync(_ => eventRepository.UpdateAsync(@event, cancellationToken))
+                .ThenAsync(() => eventRepository.UpdateAsync(@event, cancellationToken))
             : throw new ApplicationException($"Producer {@event.ProducerId} not found");
     }
 }

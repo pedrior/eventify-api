@@ -7,9 +7,9 @@ namespace Eventify.Application.Events.Commands.RemovePoster;
 internal sealed class RemoveEventPosterCommandHandler(
     IEventRepository eventRepository,
     IStorageService storageService
-) : ICommandHandler<RemoveEventPosterCommand, Deleted>
+) : ICommandHandler<RemoveEventPosterCommand, Success>
 {
-    public async Task<ErrorOr<Deleted>> Handle(RemoveEventPosterCommand command,
+    public async Task<Result<Success>> Handle(RemoveEventPosterCommand command,
         CancellationToken cancellationToken)
     {
         var @event = await eventRepository.GetAsync(command.EventId, cancellationToken);
@@ -20,7 +20,7 @@ internal sealed class RemoveEventPosterCommandHandler(
 
         if (@event.PosterUrl is null)
         {
-            return Result.Deleted;
+            return Success.Value;
         }
 
         var posterKey = StorageKeys.EventPoster(@event.Id);
@@ -34,6 +34,6 @@ internal sealed class RemoveEventPosterCommandHandler(
 
         await eventRepository.UpdateAsync(@event, cancellationToken);
 
-        return Result.Deleted;
+        return Success.Value;
     }
 }

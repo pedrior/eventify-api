@@ -2,4 +2,4 @@ using Eventify.Application.Common.Abstractions.Data;
 
 namespace Eventify.Application.Attendees.Commands.RemovePicture;
 
-public sealed record RemoveAttendeePictureCommand : ICommand<Deleted>, ITransactional;
+public sealed record RemoveAttendeePictureCommand : ICommand<Success>, ITransactional;

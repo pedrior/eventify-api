@@ -31,7 +31,7 @@ public static partial class Factories
                 saleEnd).Value;
         }
         
-        public static ErrorOr<Domain.Tickets.Ticket> CreateTicket(
+        public static Result<Domain.Tickets.Ticket> CreateTicket(
             TicketId? ticketId = null,
             EventId? eventId = null,
             string? name = Constants.Constants.Ticket.Name,

@@ -94,7 +94,7 @@ public sealed class CreateBookingCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(BookingErrors.TicketNotFound(command.TicketId));
+        result.Should().BeFailure(BookingErrors.TicketNotFound(command.TicketId));
     }
 
     [Fact]
@@ -117,13 +117,13 @@ public sealed class CreateBookingCommandHandlerTests
     {
         // Arrange
         A.CallTo(() => bookingService.PlaceBooking(@event, ticket, attendee, A<IEnumerable<Booking>>._))
-            .Returns(Error.Failure());
+            .Returns(Error.Failure("Booking failed."));
 
         // Act
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(Error.Failure());
+        result.Should().BeFailure(Error.Failure("Booking failed."));
     }
 
     [Fact]
@@ -154,7 +154,7 @@ public sealed class CreateBookingCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(booking.Adapt<BookingResponse>() with
+        result.Should().BeSuccess(booking.Adapt<BookingResponse>() with
         {
             Event = new BookingEventResponse
             {

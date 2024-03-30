@@ -1,6 +1,4 @@
 using Eventify.Application.Bookings.Events;
-using Eventify.Domain.Attendees;
-using Eventify.Domain.Attendees.Repository;
 using Eventify.Domain.Bookings;
 using Eventify.Domain.Bookings.Events;
 using Eventify.Domain.Events;
@@ -66,7 +64,7 @@ public sealed class BookingConfirmedHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WhenAddBookingToEventFails_ShouldThrowApplicationException()
+    public async Task Handle_WhenAddBookingToEventFails_ShouldThrowResultException()
     {
         // Arrange
         @event.AddBooking(booking);
@@ -75,7 +73,6 @@ public sealed class BookingConfirmedHandlerTests
         var act = () => sut.Handle(e, cancellationToken);
 
         // Assert
-        await act.Should().ThrowExactlyAsync<ApplicationException>()
-            .WithMessage($"Failed to add booking {booking.Id} to event {booking.EventId}: *");
+        await act.Should().ThrowExactlyAsync<ResultException>();
     }
 }

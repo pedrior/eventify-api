@@ -7,7 +7,7 @@ namespace Eventify.Application.Events.Queries.GetEventEditable;
 internal sealed class GetEventEditableQueryHandler(IEventRepository eventRepository)
     : IQueryHandler<GetEventEditableQuery, EventEditResponse>
 {
-    public async Task<ErrorOr<EventEditResponse>> Handle(GetEventEditableQuery query,
+    public async Task<Result<EventEditResponse>> Handle(GetEventEditableQuery query,
         CancellationToken cancellationToken)
     {
         var @event = await eventRepository.GetAsync(query.EventId, cancellationToken);

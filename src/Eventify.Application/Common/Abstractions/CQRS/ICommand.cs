@@ -1,3 +1,3 @@
 ﻿namespace Eventify.Application.Common.Abstractions.CQRS;
 
-public interface ICommand<TResponse> : IRequest<ErrorOr<TResponse>>;
+public interface ICommand<TResponse> : IRequest<Result<TResponse>>;

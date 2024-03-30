@@ -65,7 +65,7 @@ public sealed class BookingCancelledHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WhenTicketCancellationFails_ShouldThrowApplicationException()
+    public async Task Handle_WhenTicketCancellationFails_ShouldThrowResultException()
     {
         // Arrange
         var soldOutTicket = Factories.Ticket.CreateTicketValue(quantity: Quantity.Zero);
@@ -77,8 +77,7 @@ public sealed class BookingCancelledHandlerTests
         var act = () => sut.Handle(e, cancellationToken);
 
         // Assert
-        await act.Should().ThrowExactlyAsync<ApplicationException>()
-            .WithMessage($"Failed to cancel ticket ({booking.TicketId}) sale: *");
+        await act.Should().ThrowExactlyAsync<ResultException>();
     }
 
     [Fact]

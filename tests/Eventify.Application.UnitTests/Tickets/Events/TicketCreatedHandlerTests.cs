@@ -46,7 +46,7 @@ public sealed class TicketCreatedHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WhenAddingTicketToEventFails_ShouldThrowApplicationException()
+    public async Task Handle_WhenAddingTicketToEventFails_ShouldThrowResultException()
     {
         // Arrange
         @event.AddTicket(ticket); // Duplicate ticket
@@ -55,8 +55,7 @@ public sealed class TicketCreatedHandlerTests
         var act = () => sut.Handle(e, cancellationToken);
 
         // Assert
-        await act.Should().ThrowExactlyAsync<ApplicationException>()
-            .WithMessage($"Error adding ticket {ticket.Id} to event {ticket.EventId}: *");
+        await act.Should().ThrowExactlyAsync<ResultException>();
     }
 
     [Fact]

@@ -28,12 +28,8 @@ internal sealed class EventCreatedHandler(
         }
 
         var result = await producer.AddEvent(@event)
-            .ThenAsync(_ => producerRepository.UpdateAsync(producer, cancellationToken));
+            .ThenAsync(() => producerRepository.UpdateAsync(producer, cancellationToken));
 
-        if (result.IsError)
-        {
-            throw new ApplicationException($"Error adding event {@event.Id} to producer {@event.ProducerId}: " +
-                                           $"{result.FirstError.Description}");
-        }
+        result.EnsureSuccess();
     }
 }

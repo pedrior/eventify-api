@@ -1,6 +1,6 @@
 namespace Eventify.Application.Tickets.Commands.UpdateTicket;
 
-public sealed record UpdateTicketCommand : ICommand<Updated>
+public sealed record UpdateTicketCommand : ICommand<Success>
 {
     public required Guid TicketId { get; init; }
 

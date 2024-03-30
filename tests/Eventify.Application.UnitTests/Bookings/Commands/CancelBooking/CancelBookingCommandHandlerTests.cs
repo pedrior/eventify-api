@@ -55,7 +55,7 @@ public sealed class CancelBookingCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(BookingErrors.NotFound(command.BookingId));
+        result.Should().BeFailure(BookingErrors.NotFound(command.BookingId));
     }
 
     [Fact]
@@ -82,7 +82,7 @@ public sealed class CancelBookingCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError();
+        result.Should().BeFailure();
     }
 
     [Fact]
@@ -109,6 +109,6 @@ public sealed class CancelBookingCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 }

@@ -12,7 +12,7 @@ internal sealed class CancelBookingCommandHandler(
     IBookingRepository bookingRepository
 ) : ICommandHandler<CancelBookingCommand, Success>
 {
-    public async Task<ErrorOr<Success>> Handle(CancelBookingCommand command,
+    public async Task<Result<Success>> Handle(CancelBookingCommand command,
         CancellationToken cancellationToken)
     {
         var booking = await bookingRepository.GetAsync(new BookingId(command.BookingId), cancellationToken);
@@ -28,6 +28,6 @@ internal sealed class CancelBookingCommandHandler(
         }
 
         return await attendee.RequestBookingCancellation(booking)
-            .ThenAsync(_ => attendeeRepository.UpdateAsync(attendee, cancellationToken));
+            .ThenAsync(() => attendeeRepository.UpdateAsync(attendee, cancellationToken));
     }
 }

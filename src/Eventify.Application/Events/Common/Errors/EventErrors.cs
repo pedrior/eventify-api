@@ -6,20 +6,20 @@ namespace Eventify.Application.Events.Common.Errors;
 internal static class EventErrors
 {
     public static readonly Error PosterUploadFailed = Error.Failure(
-        code: "event.poster_upload_failed",
-        description: "An error occurred while uploading the event poster");
+        "An error occurred while uploading the event poster",
+        code: "event.poster_upload_failed");
 
     public static readonly Error PosterDeletionFailed = Error.Failure(
-        code: "event.poster_deletion_failed",
-        description: "An error occurred while deleting the event poster");
-    
+        "An error occurred while deleting the event poster",
+        code: "event.poster_deletion_failed");
+
     public static Error NotFound(EventId eventId) => Error.NotFound(
+        "Event not found",
         code: "event.not_found",
-        description: "Event not found",
         metadata: new() { ["event_id"] = eventId.Value });
 
     public static Error NotFound(Slug slug) => Error.NotFound(
+        "Event not found",
         code: "event.not_found",
-        description: "Event not found",
         metadata: new() { ["slug"] = slug.Value });
 }

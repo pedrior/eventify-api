@@ -94,6 +94,6 @@ public sealed class CreateEventCommandHandlerTest
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue();
+        result.Should().BeSuccess();
     }
 }

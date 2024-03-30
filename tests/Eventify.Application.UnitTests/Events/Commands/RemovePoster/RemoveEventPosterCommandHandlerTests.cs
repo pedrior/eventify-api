@@ -37,11 +37,11 @@ public sealed class RemoveEventPosterCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(EventErrors.NotFound(command.EventId));
+        result.Should().BeFailure(EventErrors.NotFound(command.EventId));
     }
 
     [Fact]
-    public async Task Handle_WhenEventDoesNotHavePoster_ShouldReturnDeleted()
+    public async Task Handle_WhenEventDoesNotHavePoster_ShouldReturnSuccess()
     {
         // Arrange
         var @event = Factories.Event.CreateEvent();
@@ -53,7 +53,7 @@ public sealed class RemoveEventPosterCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Deleted);
+        result.Should().BeSuccess(Success.Value);
     }
 
     [Fact]
@@ -133,7 +133,7 @@ public sealed class RemoveEventPosterCommandHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WhenEventHasPoster_ShouldReturnDeleted()
+    public async Task Handle_WhenEventHasPoster_ShouldReturnSuccess()
     {
         // Arrange
         var @event = Factories.Event.CreateEvent(
@@ -149,7 +149,7 @@ public sealed class RemoveEventPosterCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Deleted);
+        result.Should().BeSuccess(Success.Value);
     }
     
     [Fact]
@@ -169,6 +169,6 @@ public sealed class RemoveEventPosterCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(EventErrors.PosterDeletionFailed);
+        result.Should().BeFailure(EventErrors.PosterDeletionFailed);
     }
 }

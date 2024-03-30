@@ -61,12 +61,11 @@ public sealed class BookingPlacedHandlerTests
         var act = () => sut.Handle(e, cancellationToken);
 
         // Assert
-        await act.Should().ThrowExactlyAsync<ApplicationException>()
-            .WithMessage($"Attendee {booking.AttendeeId} not found");
+        await act.Should().ThrowExactlyAsync<ApplicationException>();
     }
 
     [Fact]
-    public async Task Handle_WhenAddBookingToAttendeeFails_ShouldThrowApplicationException()
+    public async Task Handle_WhenAddBookingToAttendeeFails_ShouldThrowResultException()
     {
         // Arrange
         attendee.AddBooking(booking);
@@ -75,8 +74,7 @@ public sealed class BookingPlacedHandlerTests
         var act = () => sut.Handle(e, cancellationToken);
 
         // Assert
-        await act.Should().ThrowExactlyAsync<ApplicationException>()
-            .WithMessage($"Failed to add booking {booking.Id} to attendee {booking.AttendeeId}: *");
+        await act.Should().ThrowExactlyAsync<ResultException>();
     }
     
     [Fact]

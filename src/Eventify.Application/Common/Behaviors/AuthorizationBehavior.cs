@@ -10,7 +10,7 @@ internal sealed class AuthorizationBehavior<TRequest, TResponse>(
     IAuthorizer<TRequest>? authorizer = null
 ) : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IBaseRequest
-    where TResponse : IErrorOr
+    where TResponse : IResult
 {
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
@@ -33,9 +33,7 @@ internal sealed class AuthorizationBehavior<TRequest, TResponse>(
             logger.LogInformation("Request {RequestName} was forbidden - {ForbiddenReason}",
                 request.GetType().Name, result.Reason);
 
-            return (TResponse)(dynamic)Error.Forbidden(
-                code: string.Empty,
-                description: "You are not authorized to perform this action.");
+            return (TResponse)(dynamic)Error.Forbidden("You are not authorized to perform this action.");
         }
 
         return await next();

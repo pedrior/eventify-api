@@ -33,7 +33,7 @@ public sealed class BookingServiceTests
         var result = sut.PlaceBooking(@event, ticket, attendee, existingTicketBookings: []);
 
         // Assert
-        result.Should().BeError(BookingErrors.RequiredPublishedEvent(@event.Id));
+        result.Should().BeFailure(BookingErrors.RequiredPublishedEvent(@event.Id));
     }
 
     [Fact]
@@ -47,7 +47,7 @@ public sealed class BookingServiceTests
         var result = sut.PlaceBooking(@event, ticket, attendee, existingTicketBookings: []);
 
         // Assert
-        result.Should().BeError(BookingErrors.UnavailableTicket(ticket.Id));
+        result.Should().BeFailure(BookingErrors.UnavailableTicket(ticket.Id));
     }
 
     [Fact]
@@ -62,7 +62,7 @@ public sealed class BookingServiceTests
         var result = sut.PlaceBooking(@event, ticket, attendee, [booking]);
 
         // Assert
-        result.Should().BeError(BookingErrors.MultipleActiveBooking(booking.Id, ticket.Id));
+        result.Should().BeFailure(BookingErrors.MultipleActiveBooking(booking.Id, ticket.Id));
     }
 
     [Fact]
@@ -75,7 +75,7 @@ public sealed class BookingServiceTests
         var result = sut.PlaceBooking(@event, ticket, attendee, existingTicketBookings: []);
 
         // Assert
-        result.Should().BeValue()
+        result.Should().BeSuccess()
             .Which.Value.Should().BeEquivalentTo(new
             {
                 AttendeeId = attendee.Id,

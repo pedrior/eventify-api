@@ -11,7 +11,7 @@ internal sealed class UploadProducerPictureCommandHandler(
     IStorageService storageService
 ) : ICommandHandler<UploadProducerPictureCommand, Success>
 {
-    public async Task<ErrorOr<Success>> Handle(UploadProducerPictureCommand command,
+    public async Task<Result<Success>> Handle(UploadProducerPictureCommand command,
         CancellationToken cancellationToken)
     {
         var producer = await producerRepository.GetByUserAsync(user.Id, cancellationToken);
@@ -31,6 +31,6 @@ internal sealed class UploadProducerPictureCommandHandler(
         }
 
         return await producer.SetPicture(pictureUrl)
-            .ThenAsync(_ => producerRepository.UpdateAsync(producer, cancellationToken));
+            .ThenAsync(() => producerRepository.UpdateAsync(producer, cancellationToken));
     }
 }

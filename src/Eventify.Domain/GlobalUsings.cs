@@ -1,1 +1,1 @@
-global using ErrorOr;
+global using ResultExtensions;

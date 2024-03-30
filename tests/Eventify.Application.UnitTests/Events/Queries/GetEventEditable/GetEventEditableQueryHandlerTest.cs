@@ -46,7 +46,7 @@ public sealed class GetEventEditableQueryHandlerTest
         var result = await sut.Handle(query, cancellationToken);
 
         // Assert
-        result.Should().BeError(EventErrors.NotFound(query.EventId));
+        result.Should().BeFailure(EventErrors.NotFound(query.EventId));
     }
 
     [Fact]
@@ -56,7 +56,7 @@ public sealed class GetEventEditableQueryHandlerTest
         var result = await sut.Handle(query, cancellationToken);
 
         // Assert
-        result.Should().BeValue()
+        result.Should().BeSuccess()
             .Which.Value.Should().BeEquivalentTo(@event.Adapt<EventEditResponse>());
     }
 }

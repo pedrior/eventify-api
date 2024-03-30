@@ -42,14 +42,14 @@ public sealed class LoginCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
         
         // Assert
-        result.Should().BeValue(authResult.Adapt<AuthResponse>());
+        result.Should().BeSuccess(authResult.Adapt<AuthResponse>());
     }
     
     [Fact]
     public async Task Handle_WhenAuthenticationIsUnsuccessful_ShouldReturnError()
     {
         // Arrange
-        var error = Error.Unauthorized();
+        var error = Error.Unauthorized("Invalid email or password.");
         
         A.CallTo(() => authService.SignInAsync(command.Email, command.Password))
             .Returns(error);
@@ -58,6 +58,6 @@ public sealed class LoginCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
         
         // Assert
-        result.Should().BeError(error);
+        result.Should().BeFailure(error);
     }
 }

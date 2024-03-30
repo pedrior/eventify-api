@@ -88,7 +88,7 @@ public sealed class UploadAttendeePictureCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeError(AttendeeErrors.PictureUploadFailed);
+        result.Should().BeFailure(AttendeeErrors.PictureUploadFailed);
     }
 
     [Fact]
@@ -161,6 +161,6 @@ public sealed class UploadAttendeePictureCommandHandlerTests
         var result = await sut.Handle(command, cancellationToken);
 
         // Assert
-        result.Should().BeValue(Result.Success);
+        result.Should().BeSuccess(Success.Value);
     }
 }

@@ -43,7 +43,7 @@ public sealed class Ticket : Entity<TicketId>, IAggregateRoot, IAuditable, ISoft
 
     public bool IsSoldOut => Quantity - QuantitySold < QuantityPerSale;
 
-    public static ErrorOr<Ticket> Create(
+    public static Result<Ticket> Create(
         TicketId ticketId,
         EventId eventId,
         string name,
@@ -77,7 +77,7 @@ public sealed class Ticket : Entity<TicketId>, IAggregateRoot, IAuditable, ISoft
         return ticket;
     }
 
-    public ErrorOr<Updated> Update(
+    public Result<Success> Update(
         string name,
         Money price,
         Quantity quantity,
@@ -104,12 +104,12 @@ public sealed class Ticket : Entity<TicketId>, IAggregateRoot, IAuditable, ISoft
         SaleStart = saleStart;
         SaleEnd = saleEnd;
 
-        return Result.Updated;
+        return Success.Value;
     }
 
     public bool IsAvailable() => !IsSoldOut && IsInSalePeriod();
 
-    public ErrorOr<Success> Sell()
+    public Result<Success> Sell()
     {
         if (IsSoldOut)
         {
@@ -123,10 +123,10 @@ public sealed class Ticket : Entity<TicketId>, IAggregateRoot, IAuditable, ISoft
 
         QuantitySold += QuantityPerSale;
 
-        return Result.Success;
+        return Success.Value;
     }
 
-    public ErrorOr<Success> CancelSale()
+    public Result<Success> CancelSale()
     {
         if (QuantitySold == Quantity.Zero)
         {
@@ -135,7 +135,7 @@ public sealed class Ticket : Entity<TicketId>, IAggregateRoot, IAuditable, ISoft
 
         QuantitySold -= QuantityPerSale;
 
-        return Result.Success;
+        return Success.Value;
     }
 
     private bool IsInSalePeriod() => (SaleStart, SaleEnd) switch

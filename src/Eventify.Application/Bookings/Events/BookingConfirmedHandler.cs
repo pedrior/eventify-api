@@ -26,12 +26,8 @@ internal sealed class BookingConfirmedHandler(
         }
 
         var result = await @event.AddBooking(booking)
-            .ThenAsync(_ => eventRepository.UpdateAsync(@event, cancellationToken));
+            .ThenAsync(() => eventRepository.UpdateAsync(@event, cancellationToken));
 
-        if (result.IsError)
-        {
-            throw new ApplicationException($"Failed to add booking {booking.Id} to " +
-                                           $"event {booking.EventId}: {result.FirstError.Description}");
-        }
+        result.EnsureSuccess();
     }
 }

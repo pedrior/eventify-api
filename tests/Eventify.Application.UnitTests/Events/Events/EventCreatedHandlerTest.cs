@@ -58,7 +58,7 @@ public sealed class EventCreatedHandlerTest
     }
 
     [Fact]
-    public async Task Handle_WhenAddingEventToProducerFails_ShouldThrowApplicationException()
+    public async Task Handle_WhenAddingEventToProducerFails_ShouldThrowResultException()
     {
         // Arrange
         producer.AddEvent(@event);
@@ -67,7 +67,6 @@ public sealed class EventCreatedHandlerTest
         var act = () => sut.Handle(e, cancellationToken);
 
         // Assert
-        await act.Should().ThrowAsync<ApplicationException>()
-            .WithMessage($"Error adding event {@event.Id} to producer {@event.ProducerId}: *");
+        await act.Should().ThrowExactlyAsync<ResultException>();
     }
 }

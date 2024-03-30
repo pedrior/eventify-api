@@ -8,25 +8,26 @@ namespace Eventify.Presentation.Controllers;
 public sealed class BookingsController : ApiController
 {
     [HttpPost]
-    public async Task<IActionResult> CreateBooking(CreateBookingRequest request, CancellationToken cancellationToken)
+    public Task<IActionResult> CreateBooking(CreateBookingRequest request, CancellationToken cancellationToken)
     {
-        var result = await SendAsync(request.Adapt<CreateBookingCommand>(), cancellationToken);
-        return result.Match(
-            onValue: response => CreatedAtAction(nameof(GetBooking), new { response.Id }, response),
-            onError: Problem);
+        return SendAsync(request.Adapt<CreateBookingCommand>(), cancellationToken)
+            .CreateAtAction(
+                actionName: nameof(GetBooking),
+                routeValues: response => new { id = response.Id },
+                context: HttpContext);
     }
 
     [HttpPost("{id:guid}/cancel")]
-    public async Task<IActionResult> CancelBooking(Guid id, CancellationToken cancellationToken)
+    public Task<IActionResult> CancelBooking(Guid id, CancellationToken cancellationToken)
     {
-        var result = await SendAsync(new CancelBookingCommand { BookingId = id }, cancellationToken);
-        return result.Match(onValue: _ => NoContent(), onError: Problem);
+        return SendAsync(new CancelBookingCommand { BookingId = id }, cancellationToken)
+            .NoContent(HttpContext);
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetBooking(Guid id, CancellationToken cancellationToken)
+    public  Task<IActionResult> GetBooking(Guid id, CancellationToken cancellationToken)
     {
-        var result = await SendAsync(new GetBookingQuery { BookingId = id }, cancellationToken);
-        return result.Match(onValue: Ok, onError: Problem);
+        return SendAsync(new GetBookingQuery { BookingId = id }, cancellationToken)
+            .Ok(HttpContext);
     }
 }

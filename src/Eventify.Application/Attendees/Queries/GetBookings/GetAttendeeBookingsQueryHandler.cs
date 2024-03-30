@@ -16,7 +16,7 @@ internal sealed class GetAttendeeBookingsQueryHandler(
     ITicketRepository ticketRepository
 ) : IQueryHandler<GetAttendeeBookingsQuery, PageResponse<AttendeeBookingResponse>>
 {
-    public async Task<ErrorOr<PageResponse<AttendeeBookingResponse>>> Handle(GetAttendeeBookingsQuery query,
+    public async Task<Result<PageResponse<AttendeeBookingResponse>>> Handle(GetAttendeeBookingsQuery query,
         CancellationToken cancellationToken)
     {
         var attendee = await attendeeRepository.GetByUserAsync(user.Id, cancellationToken);
