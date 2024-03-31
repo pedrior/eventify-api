@@ -18,6 +18,6 @@ public sealed class AccountController : ApiController
     public Task<IActionResult> Register(RegisterRequest request, CancellationToken cancellationToken)
     {
         return SendAsync(request.Adapt<RegisterCommand>(), cancellationToken)
-            .Created("", HttpContext);
+            .CreatedAtAction(actionName: nameof(Login), routeValues: new { }, context: HttpContext);
     }
 }

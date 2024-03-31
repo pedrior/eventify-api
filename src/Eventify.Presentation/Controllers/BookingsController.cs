@@ -11,7 +11,7 @@ public sealed class BookingsController : ApiController
     public Task<IActionResult> CreateBooking(CreateBookingRequest request, CancellationToken cancellationToken)
     {
         return SendAsync(request.Adapt<CreateBookingCommand>(), cancellationToken)
-            .CreateAtAction(
+            .CreatedAtAction(
                 actionName: nameof(GetBooking),
                 routeValues: response => new { id = response.Id },
                 context: HttpContext);

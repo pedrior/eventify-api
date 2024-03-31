@@ -22,7 +22,7 @@ public sealed class EventsController : ApiController
     public Task<IActionResult> CreateEvent(CreateEventRequest request, CancellationToken cancellationToken)
     {
         return SendAsync(request.Adapt<CreateEventCommand>(), cancellationToken)
-            .CreateAtAction(
+            .CreatedAtAction(
                 actionName: nameof(GetEventEditable),
                 routeValues: response => new { response.Id },
                 context: HttpContext);

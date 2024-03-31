@@ -13,7 +13,7 @@ public sealed class TicketsController : ApiController
         CancellationToken cancellationToken)
     {
         return SendAsync(request.Adapt<CreateTicketCommand>(), cancellationToken)
-            .CreateAtAction(
+            .CreatedAtAction(
                 actionName: nameof(GetTicket),
                 routeValues: response => new { response.Id },
                 context: HttpContext);

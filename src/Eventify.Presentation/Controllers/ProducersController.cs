@@ -16,7 +16,7 @@ public sealed class ProducersController : ApiController
         CancellationToken cancellationToken)
     {
         return SendAsync(request.Adapt<CreateProducerProfileCommand>(), cancellationToken)
-            .CreateAtAction(
+            .CreatedAtAction(
                 actionName: nameof(GetProfile),
                 routeValues: null,
                 context: HttpContext);
