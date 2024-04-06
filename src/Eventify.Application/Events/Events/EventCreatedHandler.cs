@@ -14,7 +14,7 @@ internal sealed class EventCreatedHandler(
     public Task Handle(EventCreated e, CancellationToken cancellationToken)
     {
         logger.LogInformation("Handling {EventName} domain event", nameof(EventCreated));
-        
+
         return AddEventToProducerAsync(e.Event, e.Event.ProducerId, cancellationToken);
     }
 
@@ -27,9 +27,8 @@ internal sealed class EventCreatedHandler(
             throw new ApplicationException($"Producer {@event.ProducerId} not found");
         }
 
-        var result = await producer.AddEvent(@event)
+        await producer.AddEvent(@event)
+            .ThrowIfFailure()
             .ThenAsync(() => producerRepository.UpdateAsync(producer, cancellationToken));
-
-        result.EnsureSuccess();
     }
 }

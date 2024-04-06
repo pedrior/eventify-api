@@ -25,9 +25,8 @@ internal sealed class BookingConfirmedHandler(
             throw new ApplicationException($"Event {booking.EventId} not found");
         }
 
-        var result = await @event.AddBooking(booking)
+        await @event.AddBooking(booking)
+            .ThrowIfFailure()
             .ThenAsync(() => eventRepository.UpdateAsync(@event, cancellationToken));
-
-        result.EnsureSuccess();
     }
 }

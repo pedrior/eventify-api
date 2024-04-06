@@ -1,5 +1,5 @@
 global using ResultExtensions;
-global using ResultExtensions.FluentAssertionsExtensions;
+global using ResultExtensions.FluentAssertions;
 global using Eventify.TestUtils.Constants;
 global using Eventify.TestUtils.Factories;
 global using FluentAssertions;

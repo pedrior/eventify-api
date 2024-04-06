@@ -35,10 +35,9 @@ internal sealed class BookingPaidHandler(
             {
                 logger.LogInformation("Cancelling booking {BookingId} due to confirmation failure", booking.Id);
 
-                var result = await booking.Cancel(CancellationReason.TicketUnavailable)
+                await booking.Cancel(CancellationReason.TicketUnavailable)
+                    .ThrowIfFailure()
                     .ThenAsync(() => bookingRepository.UpdateAsync(booking, cancellationToken));
-
-                result.EnsureSuccess();
             });
     }
 }

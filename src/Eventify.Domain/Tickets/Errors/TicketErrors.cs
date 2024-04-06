@@ -19,14 +19,14 @@ internal static class TicketErrors
     public static Error NotInSalePeriod(DateTimeOffset? saleStart, DateTimeOffset? saleEnd) => Error.Conflict(
         "The ticket is not in sale period",
         code: "ticket.not_in_sale_period",
-        metadata: new()
+        details: new Dictionary<string, object?>
         {
             ["sale_start"] = saleStart?.ToString("O") ?? "null",
             ["sale_end"] = saleEnd?.ToString("O") ?? "null"
-        });
+        }.ToFrozenDictionary());
 
     public static Error QuantityMustBeGreaterThanQuantitySold(Quantity quantitySold) => Error.Failure(
         "The quantity must be greater than the quantity sold",
         code: "ticket.quantity_must_be_greater_than_quantity_sold",
-        metadata: new() { ["quantity_sold"] = quantitySold.Value });
+        details: new Dictionary<string, object?> { ["quantity_sold"] = quantitySold.Value }.ToFrozenDictionary());
 }

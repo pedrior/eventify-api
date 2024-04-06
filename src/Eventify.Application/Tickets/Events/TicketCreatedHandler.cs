@@ -25,9 +25,8 @@ internal sealed class TicketCreatedHandler(
             throw new ApplicationException($"Event {ticket.EventId} not found");
         }
 
-        var result = await @event.AddTicket(ticket)
+        await @event.AddTicket(ticket)
+            .ThrowIfFailure()
             .ThenAsync(() => eventRepository.UpdateAsync(@event, cancellationToken));
-
-        result.EnsureSuccess();
     }
 }

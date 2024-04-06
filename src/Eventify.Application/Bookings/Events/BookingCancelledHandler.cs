@@ -29,9 +29,8 @@ internal sealed class BookingCancelledHandler(
             throw new ApplicationException($"Ticket {booking.TicketId} not found");
         }
 
-        var result = await ticket.CancelSale()
+        await ticket.CancelSale()
+            .ThrowIfFailure()
             .ThenAsync(() => ticketRepository.UpdateAsync(ticket, cancellationToken));
-
-        result.EnsureSuccess();
     }
 }

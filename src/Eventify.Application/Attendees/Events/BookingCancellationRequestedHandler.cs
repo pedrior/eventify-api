@@ -28,9 +28,8 @@ internal sealed class BookingCancellationRequestedHandler(
         }
 
         // Just accept the cancellation request
-        var result = await booking.Cancel(CancellationReason.AttendeeRequest)
+        await booking.Cancel(CancellationReason.AttendeeRequest)
+            .ThrowIfFailure()
             .ThenAsync(() => bookingRepository.UpdateAsync(booking, cancellationToken));
-
-        result.EnsureSuccess();
     }
 }

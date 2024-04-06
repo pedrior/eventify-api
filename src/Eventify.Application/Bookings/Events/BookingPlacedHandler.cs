@@ -20,7 +20,7 @@ internal sealed class BookingPlacedHandler(
         await AddBookingToAttendeeAsync(e.Booking, cancellationToken);
         await ProcessBookingPaymentAsync(e.Booking, cancellationToken);
     }
-    
+
     private async Task AddBookingToAttendeeAsync(Booking booking, CancellationToken cancellationToken)
     {
         var attendee = await attendeeRepository.GetAsync(booking.AttendeeId, cancellationToken);
@@ -29,20 +29,19 @@ internal sealed class BookingPlacedHandler(
             throw new ApplicationException($"Attendee {booking.AttendeeId} not found");
         }
 
-        var result = await attendee.AddBooking(booking)
+        await attendee.AddBooking(booking)
+            .ThrowIfFailure()
             .ThenAsync(() => attendeeRepository.UpdateAsync(attendee, cancellationToken));
-
-        result.EnsureSuccess();
     }
 
     private async Task ProcessBookingPaymentAsync(Booking booking, CancellationToken cancellationToken)
     {
-        var result = await (Random.Shared.Next(10) switch
-        {
-            > 4 => booking.Pay(),
-            _ => booking.Cancel(CancellationReason.PaymentFailed)
-        }).ThenAsync(_ => bookingRepository.UpdateAsync(booking, cancellationToken));
-
-        result.EnsureSuccess();
+        await (Random.Shared.Next(10) switch
+            {
+                > 4 => booking.Pay(),
+                _ => booking.Cancel(CancellationReason.PaymentFailed)
+            })
+            .ThrowIfFailure()
+            .ThenAsync(_ => bookingRepository.UpdateAsync(booking, cancellationToken));
     }
 }
