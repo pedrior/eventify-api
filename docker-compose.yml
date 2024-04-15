@@ -25,6 +25,8 @@ services:
     volumes:
       - $APPDATA/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - $USERPROFILE/.aspnet/https:/https:ro
+      - ~/.aspnet/https:/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
   
   eventify.db:
     image: postgres:latest
