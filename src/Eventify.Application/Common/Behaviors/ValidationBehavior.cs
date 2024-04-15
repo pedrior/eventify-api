@@ -23,5 +23,5 @@ internal sealed class ValidationBehavior<TRequest, TResponse>(
     }
 
     private static List<Error> ConvertValidationFailuresToResult(List<ValidationFailure> failures) =>
-        failures.ConvertAll(f => Error.Validation(f.PropertyName, f.ErrorMessage));
+        failures.ConvertAll(f => Error.Validation(message: f.ErrorMessage, code: f.PropertyName));
 }
