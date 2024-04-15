@@ -1,10 +1,10 @@
-﻿using Eventify.Application.Common.Abstractions.Data;
+﻿using Eventify.Application.Common.Abstractions.Persistence;
 using Eventify.Domain.Attendees;
 using Eventify.Domain.Events;
 using Eventify.Domain.Producers;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Eventify.Infrastructure.Common.Data;
+namespace Eventify.Infrastructure.Common.Persistence;
 
 internal sealed class DataContext(DbContextOptions<DataContext> options) : DbContext(options), IUnitOfWork
 {

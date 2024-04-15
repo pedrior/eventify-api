@@ -4,7 +4,7 @@ using Eventify.Domain.Bookings.Repository;
 using Eventify.Domain.Bookings.ValueObjects;
 using Eventify.Domain.Events.ValueObjects;
 using Eventify.Domain.Tickets.ValueObjects;
-using Eventify.Infrastructure.Common.Data;
+using Eventify.Infrastructure.Common.Persistence;
 
 namespace Eventify.Infrastructure.Bookings.Data;
 

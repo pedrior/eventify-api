@@ -4,7 +4,7 @@ using Eventify.Domain.Events.Enums;
 using Eventify.Domain.Events.Repository;
 using Eventify.Domain.Events.ValueObjects;
 using Eventify.Domain.Producers.ValueObjects;
-using Eventify.Infrastructure.Common.Data;
+using Eventify.Infrastructure.Common.Persistence;
 
 namespace Eventify.Infrastructure.Events.Data;
 

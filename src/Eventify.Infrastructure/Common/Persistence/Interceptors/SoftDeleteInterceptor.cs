@@ -1,7 +1,7 @@
 using Eventify.Domain.Common.Entities;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace Eventify.Infrastructure.Common.Data.Interceptors;
+namespace Eventify.Infrastructure.Common.Persistence.Interceptors;
 
 internal sealed class SoftDeleteInterceptor(TimeProvider timeProvider) : SaveChangesInterceptor
 {

@@ -1,7 +1,7 @@
 using Eventify.Domain.Producers.Repository;
 using Eventify.Domain.Producers.ValueObjects;
 using Eventify.Domain.Users.ValueObjects;
-using Eventify.Infrastructure.Common.Data;
+using Eventify.Infrastructure.Common.Persistence;
 
 namespace Eventify.Infrastructure.Producers.Data;
 

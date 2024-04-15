@@ -2,7 +2,7 @@ using Eventify.Domain.Attendees;
 using Eventify.Domain.Attendees.Repository;
 using Eventify.Domain.Attendees.ValueObjects;
 using Eventify.Domain.Users.ValueObjects;
-using Eventify.Infrastructure.Common.Data;
+using Eventify.Infrastructure.Common.Persistence;
 
 namespace Eventify.Infrastructure.Attendees.Data;
 

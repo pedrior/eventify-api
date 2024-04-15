@@ -1,4 +1,4 @@
-using Eventify.Application.Common.Abstractions.Data;
+using Eventify.Application.Common.Abstractions.Persistence;
 using Eventify.Contracts.Tickets.Responses;
 
 namespace Eventify.Application.Tickets.Commands.CreateTicket;

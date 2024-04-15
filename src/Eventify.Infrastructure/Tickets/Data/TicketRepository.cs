@@ -2,7 +2,7 @@ using Eventify.Domain.Events.ValueObjects;
 using Eventify.Domain.Tickets;
 using Eventify.Domain.Tickets.Repository;
 using Eventify.Domain.Tickets.ValueObjects;
-using Eventify.Infrastructure.Common.Data;
+using Eventify.Infrastructure.Common.Persistence;
 
 namespace Eventify.Infrastructure.Tickets.Data;
 

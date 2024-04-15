@@ -1,4 +1,4 @@
-using Eventify.Application.Common.Abstractions.Data;
+using Eventify.Application.Common.Abstractions.Persistence;
 using Eventify.Contracts.Tokens.Responses;
 
 namespace Eventify.Application.Tokens.Commands.RefreshToken;

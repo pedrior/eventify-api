@@ -1,4 +1,4 @@
-using Eventify.Application.Common.Abstractions.Data;
+using Eventify.Application.Common.Abstractions.Persistence;
 
 namespace Eventify.Application.Events.Commands.UpdateDetails;
 

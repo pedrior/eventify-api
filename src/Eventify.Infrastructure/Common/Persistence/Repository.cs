@@ -1,7 +1,7 @@
 using Eventify.Domain.Common.Entities;
 using Eventify.Domain.Common.Repository;
 
-namespace Eventify.Infrastructure.Common.Data;
+namespace Eventify.Infrastructure.Common.Persistence;
 
 internal abstract class Repository<TEntity, TId, TContext>(TContext context) : IRepository<TEntity, TId>
     where TEntity : class, IEntity<TId>, IAggregateRoot

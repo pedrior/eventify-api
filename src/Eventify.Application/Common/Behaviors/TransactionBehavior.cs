@@ -1,4 +1,4 @@
-﻿using Eventify.Application.Common.Abstractions.Data;
+﻿using Eventify.Application.Common.Abstractions.Persistence;
 using Microsoft.Extensions.Logging;
 
 namespace Eventify.Application.Common.Behaviors;

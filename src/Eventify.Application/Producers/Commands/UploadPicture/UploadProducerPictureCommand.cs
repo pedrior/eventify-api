@@ -1,5 +1,5 @@
-using Eventify.Application.Common.Abstractions.Data;
 using Eventify.Application.Common.Abstractions.Files;
+using Eventify.Application.Common.Abstractions.Persistence;
 
 namespace Eventify.Application.Producers.Commands.UploadPicture;
 

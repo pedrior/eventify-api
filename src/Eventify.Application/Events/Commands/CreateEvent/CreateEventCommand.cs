@@ -1,4 +1,4 @@
-using Eventify.Application.Common.Abstractions.Data;
+using Eventify.Application.Common.Abstractions.Persistence;
 using Eventify.Contracts.Events.Responses;
 
 namespace Eventify.Application.Events.Commands.CreateEvent;

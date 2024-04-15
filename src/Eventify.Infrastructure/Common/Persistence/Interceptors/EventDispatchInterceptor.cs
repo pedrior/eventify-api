@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace Eventify.Infrastructure.Common.Data.Interceptors;
+namespace Eventify.Infrastructure.Common.Persistence.Interceptors;
 
 internal sealed class EventDispatchInterceptor(IPublisher publisher) : SaveChangesInterceptor
 {

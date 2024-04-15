@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace Eventify.Infrastructure.Common.Data.Interceptors;
+namespace Eventify.Infrastructure.Common.Persistence.Interceptors;
 
 internal sealed class AuditableInterceptor(TimeProvider timeProvider) : SaveChangesInterceptor
 {
