@@ -15,6 +15,9 @@
         <Content Include="..\..\.dockerignore">
             <Link>.dockerignore</Link>
         </Content>
+        <Content Include="Requests\.images\**\*">
+            <Link>Requests\.images\%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </Content>
     </ItemGroup>
     
     <ItemGroup>
