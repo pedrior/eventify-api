@@ -11,7 +11,7 @@ namespace Eventify.Presentation.Controllers;
 [ApiVersion(1)]
 public sealed class ProducersController : ApiController
 {
-    [HttpPost]
+    [HttpPost("profile")]
     public Task<IActionResult> CreateProfile(CreateProducerProfileRequest request,
         CancellationToken cancellationToken)
     {
@@ -23,7 +23,7 @@ public sealed class ProducersController : ApiController
                 HttpContext);
     }
 
-    [HttpPost("picture")]
+    [HttpPost("profile-picture")]
     [RequestSizeLimit(RequestConstants.ImageSizeLimit)]
     public Task<IActionResult> UpdatePicture([FromForm(Name = "picture")] IFormFile picture,
         CancellationToken cancellationToken)
@@ -35,7 +35,7 @@ public sealed class ProducersController : ApiController
             .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
-    [HttpGet]
+    [HttpGet("profile")]
     public Task<IActionResult> GetProfile(CancellationToken cancellationToken)
     {
         return SendAsync(new GetProducerProfileQuery(), cancellationToken)
@@ -49,7 +49,7 @@ public sealed class ProducersController : ApiController
             .ToResponseAsync(Ok, HttpContext);
     }
 
-    [HttpPost]
+    [HttpPost("update-profile")]
     public Task<IActionResult> UpdateProfile(UpdateProducerProfileRequest request,
         CancellationToken cancellationToken)
     {
@@ -57,7 +57,7 @@ public sealed class ProducersController : ApiController
             .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
-    [HttpDelete("picture")]
+    [HttpDelete("profile-picture")]
     public Task<IActionResult> RemovePicture(CancellationToken cancellationToken)
     {
         return SendAsync(new RemoveProducerPictureCommand(), cancellationToken)

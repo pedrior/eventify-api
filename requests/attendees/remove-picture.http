@@ -1,2 +1,2 @@
-DELETE {{base_url}}/v1/attendees/picture
+DELETE {{base_url}}/v1/attendees/profile-picture
 Authorization: Bearer {{access_token}}

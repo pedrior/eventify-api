@@ -277,7 +277,7 @@ __Expected response__
 Retrieves the attendee's profile information.
 
 ```http
-GET /v1/attendees
+GET /v1/attendees/profile
 ```
 
 __Expected response__

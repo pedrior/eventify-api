@@ -10,7 +10,7 @@ namespace Eventify.Presentation.Controllers;
 [ApiVersion(1)]
 public sealed class AttendeesController : ApiController
 {
-    [HttpPost("picture")]
+    [HttpPost("pprofile-icture")]
     [RequestSizeLimit(RequestConstants.ImageSizeLimit)]
     public Task<IActionResult> UploadPicture([FromForm(Name = "picture")] IFormFile picture,
         CancellationToken cancellationToken)
@@ -22,7 +22,7 @@ public sealed class AttendeesController : ApiController
             .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
-    [HttpGet]
+    [HttpGet("profile")]
     public Task<IActionResult> GetProfile(CancellationToken cancellationToken)
     {
         return SendAsync(new GetAttendeeProfileQuery(), cancellationToken)
@@ -41,7 +41,7 @@ public sealed class AttendeesController : ApiController
             .ToResponseAsync(Ok, HttpContext);
     }
 
-    [HttpPost]
+    [HttpPost("update-profile")]
     public Task<IActionResult> UpdateProfile(UpdateAttendeeProfileRequest request,
         CancellationToken cancellationToken)
     {
@@ -49,7 +49,7 @@ public sealed class AttendeesController : ApiController
             .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
-    [HttpDelete("picture")]
+    [HttpDelete("profile-picture")]
     public Task<IActionResult> RemovePicture(CancellationToken cancellationToken)
     {
         return SendAsync(new RemoveAttendeePictureCommand(), cancellationToken)

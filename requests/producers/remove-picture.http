@@ -1,2 +1,2 @@
-DELETE {{base_url}}/v1/producers/picture
+DELETE {{base_url}}/v1/producers/profile-picture
 Authorization: Bearer {{access_token}}

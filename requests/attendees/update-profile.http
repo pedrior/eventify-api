@@ -1,4 +1,4 @@
-POST {{base_url}}/v1/attendees
+POST {{base_url}}/v1/attendees/update-profile
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 

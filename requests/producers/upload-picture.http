@@ -1,4 +1,4 @@
-POST {{base_url}}/v1/producers/picture
+POST {{base_url}}/v1/producers/profile-picture
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 Authorization: Bearer {{access_token}}
 
