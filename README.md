@@ -9,7 +9,7 @@ This project exemplifies top coding standards, providing a neat, effective, and 
 
 - [Project](#sparkles-project)
 - [Getting Started](#runner-getting-started)
-- [API](#globe_with_meridians-endpoints)
+- [API](#globe_with_meridians-api)
 - [License](#page_with_curl-license)
 
 ## :sparkles: Project
