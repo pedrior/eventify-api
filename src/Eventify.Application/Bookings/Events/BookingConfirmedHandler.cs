@@ -1,3 +1,4 @@
+using Eventify.Application.Common.Abstractions.Requests;
 using Eventify.Domain.Bookings;
 using Eventify.Domain.Bookings.Events;
 using Eventify.Domain.Events.Repository;

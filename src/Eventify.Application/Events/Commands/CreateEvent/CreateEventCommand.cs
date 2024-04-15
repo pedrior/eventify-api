@@ -1,4 +1,5 @@
 using Eventify.Application.Common.Abstractions.Persistence;
+using Eventify.Application.Common.Abstractions.Requests;
 using Eventify.Contracts.Events.Responses;
 
 namespace Eventify.Application.Events.Commands.CreateEvent;

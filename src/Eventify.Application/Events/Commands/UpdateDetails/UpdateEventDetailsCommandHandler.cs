@@ -1,3 +1,4 @@
+using Eventify.Application.Common.Abstractions.Requests;
 using Eventify.Application.Events.Common.Errors;
 using Eventify.Domain.Common.Enums;
 using Eventify.Domain.Events.Enums;

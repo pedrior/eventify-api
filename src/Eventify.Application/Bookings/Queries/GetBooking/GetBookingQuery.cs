@@ -1,3 +1,4 @@
+using Eventify.Application.Common.Abstractions.Requests;
 using Eventify.Contracts.Bookings.Responses;
 
 namespace Eventify.Application.Bookings.Queries.GetBooking;

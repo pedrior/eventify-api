@@ -1,4 +1,5 @@
 using Eventify.Application.Common.Abstractions.Identity;
+using Eventify.Application.Common.Abstractions.Requests;
 using Eventify.Application.Common.Security;
 using Eventify.Domain.Producers.Events;
 using Eventify.Domain.Users.ValueObjects;

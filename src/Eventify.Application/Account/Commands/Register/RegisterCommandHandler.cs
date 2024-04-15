@@ -1,4 +1,5 @@
 using Eventify.Application.Common.Abstractions.Identity;
+using Eventify.Application.Common.Abstractions.Requests;
 using Eventify.Domain.Attendees;
 using Eventify.Domain.Attendees.Repository;
 using Eventify.Domain.Attendees.ValueObjects;

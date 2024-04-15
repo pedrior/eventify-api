@@ -1,3 +1,4 @@
+using Eventify.Application.Common.Abstractions.Requests;
 using Eventify.Application.Tickets.Common.Errors;
 using Eventify.Contracts.Tickets.Responses;
 using Eventify.Domain.Common.ValueObjects;

@@ -1,4 +1,5 @@
 using Eventify.Application.Bookings.Common.Errors;
+using Eventify.Application.Common.Abstractions.Requests;
 using Eventify.Contracts.Bookings.Responses;
 using Eventify.Domain.Bookings.Repository;
 using Eventify.Domain.Events.Repository;

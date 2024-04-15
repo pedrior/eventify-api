@@ -1,3 +1,4 @@
+using Eventify.Application.Common.Abstractions.Requests;
 using Eventify.Application.Events.Common.Errors;
 using Eventify.Domain.Events.Repository;
 using Eventify.Domain.Events.ValueObjects;

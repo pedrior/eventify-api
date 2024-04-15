@@ -1,3 +1,4 @@
+using Eventify.Application.Common.Abstractions.Requests;
 using Eventify.Contracts.Attendees.Responses;
 
 namespace Eventify.Application.Attendees.Queries.GetProfile;
