@@ -185,12 +185,22 @@ Examples:
 ```json
 {
   "type": "https://tools.ietf.org/html/rfc9110#section-15.5.10",
-  "title": "The producer profile already exists",
+  "title": "Conflict",
   "status": 409,
-  "traceId": "00-644db4453cc9472b833eb729cb4f5db1-96612bcce84a96ad-00",
-  "code": "producer.profile_already_created"
+  "traceId": "00-9544cfe6df9d42a0553f910ca6d228b7-6469fbed19a87208-00",
+  "errors": [
+    {
+      "code": "event.slug_already_exists",
+      "message": "The slug is already associated with another event",
+      "details": {
+        "slug": "awesome-event-slug"
+      }
+    }
+  ]
 }
 ```
+
+Validation errors:
 
 ```json
 {
@@ -198,18 +208,12 @@ Examples:
   "title": "One or more validation errors occurred.",
   "status": 400,
   "errors": {
-    "language": [
-      "Must be a supported language."
-    ],
-    "period_start": [
-      "Must be in the future."
-    ],
-    "location_name": [
+    "slug": [
       "Must not be empty.",
-      "Must contain only letters, numbers and special characters."
+      "Must contain only lowercase letters, numbers, dashes and must not start or end with a dash."
     ]
   },
-  "traceId": "00-204f3dc9742993c27181094fa3f707ff-8b8ec56e88d528e4-00"
+  "traceId": "00-3d6a0b01f3384b9327b7de83c37c8005-792cece6737ab181-00"
 }
 ```
 
