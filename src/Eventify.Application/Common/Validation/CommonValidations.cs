@@ -1,4 +1,4 @@
-using Eventify.Application.Common.Abstractions.Files;
+using Eventify.Application.Common.Abstractions.Storage;
 using Eventify.Application.Common.Extensions;
 using Eventify.Domain.Common;
 

@@ -1,4 +1,3 @@
-using Eventify.Application.Common.Abstractions.Files;
 using Eventify.Application.Common.Abstractions.Storage;
 using Eventify.Application.Producers.Commands.UploadPicture;
 using Eventify.Application.Producers.Common.Errors;

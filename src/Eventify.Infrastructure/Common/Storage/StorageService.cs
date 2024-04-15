@@ -1,7 +1,6 @@
 using System.Net;
 using Amazon.S3;
 using Amazon.S3.Model;
-using Eventify.Application.Common.Abstractions.Files;
 using Eventify.Application.Common.Abstractions.Storage;
 using Microsoft.Extensions.Options;
 

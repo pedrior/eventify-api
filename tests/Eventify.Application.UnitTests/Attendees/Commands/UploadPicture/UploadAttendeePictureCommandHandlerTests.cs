@@ -1,6 +1,5 @@
 using Eventify.Application.Attendees.Commands.UploadPicture;
 using Eventify.Application.Attendees.Common.Errors;
-using Eventify.Application.Common.Abstractions.Files;
 using Eventify.Application.Common.Abstractions.Storage;
 using Eventify.Domain.Attendees;
 using Eventify.Domain.Attendees.Repository;

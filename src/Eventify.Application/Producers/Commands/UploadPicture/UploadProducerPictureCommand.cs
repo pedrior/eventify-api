@@ -1,4 +1,4 @@
-using Eventify.Application.Common.Abstractions.Files;
+using Eventify.Application.Common.Abstractions.Storage;
 
 namespace Eventify.Application.Producers.Commands.UploadPicture;
 

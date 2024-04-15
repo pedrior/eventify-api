@@ -1,4 +1,4 @@
-namespace Eventify.Application.Common.Abstractions.Files;
+namespace Eventify.Application.Common.Abstractions.Storage;
 
 public interface IFile
 {
