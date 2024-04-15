@@ -1,5 +1,3 @@
-using Eventify.Application.Common.Abstractions.Requests;
-
 namespace Eventify.Application.Tickets.Commands.RemoveTicket;
 
 public sealed record RemoveTicketCommand : ICommand<Success>

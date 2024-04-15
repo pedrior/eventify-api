@@ -1,4 +1,3 @@
-using Eventify.Application.Common.Abstractions.Requests;
 using Eventify.Contracts.Events.Responses;
 using Eventify.Domain.Common.Enums;
 using Eventify.Domain.Common.ValueObjects;

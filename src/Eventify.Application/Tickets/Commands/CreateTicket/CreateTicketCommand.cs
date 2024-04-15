@@ -1,5 +1,3 @@
-using Eventify.Application.Common.Abstractions.Persistence;
-using Eventify.Application.Common.Abstractions.Requests;
 using Eventify.Contracts.Tickets.Responses;
 
 namespace Eventify.Application.Tickets.Commands.CreateTicket;

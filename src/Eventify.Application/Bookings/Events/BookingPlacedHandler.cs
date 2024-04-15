@@ -1,4 +1,3 @@
-using Eventify.Application.Common.Abstractions.Requests;
 using Eventify.Domain.Attendees.Repository;
 using Eventify.Domain.Bookings;
 using Eventify.Domain.Bookings.Enums;

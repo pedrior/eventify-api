@@ -1,4 +1,3 @@
-using Eventify.Application.Common.Abstractions.Requests;
 using Eventify.Domain.Producers.Repository;
 using Eventify.Domain.Producers.ValueObjects;
 using Eventify.Domain.Users;

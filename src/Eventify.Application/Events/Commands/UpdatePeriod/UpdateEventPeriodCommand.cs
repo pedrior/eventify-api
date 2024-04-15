@@ -1,6 +1,3 @@
-using Eventify.Application.Common.Abstractions.Persistence;
-using Eventify.Application.Common.Abstractions.Requests;
-
 namespace Eventify.Application.Events.Commands.UpdatePeriod;
 
 public sealed record UpdateEventPeriodCommand : ICommand<Success>, ITransactional

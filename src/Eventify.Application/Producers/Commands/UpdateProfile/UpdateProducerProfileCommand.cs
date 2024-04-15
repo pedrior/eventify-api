@@ -1,6 +1,3 @@
-using Eventify.Application.Common.Abstractions.Persistence;
-using Eventify.Application.Common.Abstractions.Requests;
-
 namespace Eventify.Application.Producers.Commands.UpdateProfile;
 
 public class UpdateProducerProfileCommand : ICommand<Success>, ITransactional

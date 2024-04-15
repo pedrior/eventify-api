@@ -1,4 +1,3 @@
-using Eventify.Application.Common.Abstractions.Requests;
 using Eventify.Application.Producers.Common.Errors;
 using Eventify.Domain.Producers;
 using Eventify.Domain.Producers.Repository;

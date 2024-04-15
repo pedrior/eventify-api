@@ -1,6 +1,3 @@
-using Eventify.Application.Common.Abstractions.Persistence;
-using Eventify.Application.Common.Abstractions.Requests;
-
 namespace Eventify.Application.Account.Commands.Register;
 
 public sealed record RegisterCommand : ICommand<Success>, ITransactional
