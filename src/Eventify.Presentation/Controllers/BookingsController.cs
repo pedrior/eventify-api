@@ -11,23 +11,24 @@ public sealed class BookingsController : ApiController
     public Task<IActionResult> CreateBooking(CreateBookingRequest request, CancellationToken cancellationToken)
     {
         return SendAsync(request.Adapt<CreateBookingCommand>(), cancellationToken)
-            .CreatedAtAction(
-                actionName: nameof(GetBooking),
-                routeValues: response => new { id = response.Id },
-                context: HttpContext);
+            .ToResponseAsync(response => CreatedAtAction(
+                    nameof(GetBooking),
+                    new { id = response.Id },
+                    response),
+                HttpContext);
     }
 
     [HttpPost("{id:guid}/cancel")]
     public Task<IActionResult> CancelBooking(Guid id, CancellationToken cancellationToken)
     {
         return SendAsync(new CancelBookingCommand { BookingId = id }, cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
     [HttpGet("{id:guid}")]
-    public  Task<IActionResult> GetBooking(Guid id, CancellationToken cancellationToken)
+    public Task<IActionResult> GetBooking(Guid id, CancellationToken cancellationToken)
     {
         return SendAsync(new GetBookingQuery { BookingId = id }, cancellationToken)
-            .Ok(HttpContext);
+            .ToResponseAsync(Ok, HttpContext);
     }
 }

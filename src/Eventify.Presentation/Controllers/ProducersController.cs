@@ -16,10 +16,11 @@ public sealed class ProducersController : ApiController
         CancellationToken cancellationToken)
     {
         return SendAsync(request.Adapt<CreateProducerProfileCommand>(), cancellationToken)
-            .CreatedAtAction(
-                actionName: nameof(GetProfile),
-                routeValues: null,
-                context: HttpContext);
+            .ToResponseAsync(response => CreatedAtAction(
+                    nameof(GetProfile),
+                    new { },
+                    response),
+                HttpContext);
     }
 
     [HttpPost("picture")]
@@ -31,21 +32,21 @@ public sealed class ProducersController : ApiController
             {
                 Picture = new FileProxy(picture)
             }, cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
     [HttpGet]
     public Task<IActionResult> GetProfile(CancellationToken cancellationToken)
     {
         return SendAsync(new GetProducerProfileQuery(), cancellationToken)
-            .Ok(HttpContext);
+            .ToResponseAsync(Ok, HttpContext);
     }
 
     [HttpGet("events")]
     public Task<IActionResult> GetEvents(CancellationToken cancellationToken)
     {
         return SendAsync(new GetProducerEventsQuery(), cancellationToken)
-            .Ok(HttpContext);
+            .ToResponseAsync(Ok, HttpContext);
     }
 
     [HttpPost]
@@ -53,13 +54,13 @@ public sealed class ProducersController : ApiController
         CancellationToken cancellationToken)
     {
         return SendAsync(request.Adapt<UpdateProducerProfileCommand>(), cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
     [HttpDelete("picture")]
     public Task<IActionResult> RemovePicture(CancellationToken cancellationToken)
     {
         return SendAsync(new RemoveProducerPictureCommand(), cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 }

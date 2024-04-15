@@ -23,10 +23,10 @@ internal static class TicketErrors
         {
             ["sale_start"] = saleStart?.ToString("O") ?? "null",
             ["sale_end"] = saleEnd?.ToString("O") ?? "null"
-        }.ToFrozenDictionary());
+        });
 
     public static Error QuantityMustBeGreaterThanQuantitySold(Quantity quantitySold) => Error.Failure(
         "The quantity must be greater than the quantity sold",
         code: "ticket.quantity_must_be_greater_than_quantity_sold",
-        details: new Dictionary<string, object?> { ["quantity_sold"] = quantitySold.Value }.ToFrozenDictionary());
+        details: new Dictionary<string, object?> { ["quantity_sold"] = quantitySold.Value });
 }

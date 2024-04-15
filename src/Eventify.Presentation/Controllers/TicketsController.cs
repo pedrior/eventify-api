@@ -13,10 +13,11 @@ public sealed class TicketsController : ApiController
         CancellationToken cancellationToken)
     {
         return SendAsync(request.Adapt<CreateTicketCommand>(), cancellationToken)
-            .CreatedAtAction(
-                actionName: nameof(GetTicket),
-                routeValues: response => new { response.Id },
-                context: HttpContext);
+            .ToResponseAsync(response => CreatedAtAction(
+                    nameof(GetTicket),
+                    new { id = response.Id },
+                    response),
+                HttpContext);
     }
 
     [HttpGet("{id:guid}")]
@@ -26,7 +27,7 @@ public sealed class TicketsController : ApiController
             {
                 TicketId = id
             }, cancellationToken)
-            .Ok(HttpContext);
+            .ToResponseAsync(Ok, HttpContext);
     }
 
     [HttpPost("{id:guid}")]
@@ -37,7 +38,7 @@ public sealed class TicketsController : ApiController
             {
                 TicketId = id
             }, cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
     [HttpDelete("{id:guid}")]
@@ -47,6 +48,6 @@ public sealed class TicketsController : ApiController
             {
                 TicketId = id
             }, cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 }

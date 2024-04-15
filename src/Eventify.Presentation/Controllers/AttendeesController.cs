@@ -19,14 +19,14 @@ public sealed class AttendeesController : ApiController
             {
                 Picture = new FileProxy(picture)
             }, cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
     [HttpGet]
     public Task<IActionResult> GetProfile(CancellationToken cancellationToken)
     {
         return SendAsync(new GetAttendeeProfileQuery(), cancellationToken)
-            .Ok(HttpContext);
+            .ToResponseAsync(Ok, HttpContext);
     }
 
     [HttpGet("bookings")]
@@ -38,7 +38,7 @@ public sealed class AttendeesController : ApiController
                 Page = request.Page,
                 Limit = request.Limit
             }, cancellationToken)
-            .Ok(HttpContext);
+            .ToResponseAsync(Ok, HttpContext);
     }
 
     [HttpPost]
@@ -46,13 +46,13 @@ public sealed class AttendeesController : ApiController
         CancellationToken cancellationToken)
     {
         return SendAsync(request.Adapt<UpdateAttendeeProfileCommand>(), cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
     [HttpDelete("picture")]
     public Task<IActionResult> RemovePicture(CancellationToken cancellationToken)
     {
         return SendAsync(new RemoveAttendeePictureCommand(), cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 }

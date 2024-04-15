@@ -26,30 +26,30 @@ internal static class EventErrors
     public static Error InvalidOperation(EventState state) => Error.Conflict(
         "Invalid operation for the current event state",
         code: "event.invalid_operation",
-        details: new Dictionary<string, object?> { ["state"] = state.Name }.ToFrozenDictionary());
+        details: new Dictionary<string, object?> { ["state"] = state.Name });
 
     public static Error SlugAlreadyExists(Slug slug) => Error.Conflict(
         "The slug is already associated with another event",
         code: "event.slug_already_exists",
-        details: new Dictionary<string, object?> { ["slug"] = slug.Value }.ToFrozenDictionary());
+        details: new Dictionary<string, object?> { ["slug"] = slug.Value });
 
     public static Error TicketAlreadyAdded(TicketId ticketId) => Error.Conflict(
         "The event already has the ticket",
         code: "event.ticket_already_added",
-        details: new Dictionary<string, object?> { ["ticket_id"] = ticketId.Value }.ToFrozenDictionary());
+        details: new Dictionary<string, object?> { ["ticket_id"] = ticketId.Value });
 
     public static Error TicketNotFound(TicketId ticketId) => Error.NotFound(
         "The event does not have the ticket",
         code: "event.ticket_not_found",
-        details: new Dictionary<string, object?> { ["ticket_id"] = ticketId.Value }.ToFrozenDictionary());
+        details: new Dictionary<string, object?> { ["ticket_id"] = ticketId.Value });
 
     public static Error TicketLimitReached(int limit) => Error.Conflict(
         "The event has reached the maximum number of tickets",
         code: "event.ticket_limit_reached",
-        details: new Dictionary<string, object?> { ["limit"] = limit }.ToFrozenDictionary());
+        details: new Dictionary<string, object?> { ["limit"] = limit });
 
     public static Error BookingAlreadyAdded(BookingId ticketId) => Error.Conflict(
         "The event already has the booking",
         code: "event.booking_already_added",
-        details: new Dictionary<string, object?> { ["booking_id"] = ticketId.Value }.ToFrozenDictionary());
+        details: new Dictionary<string, object?> { ["booking_id"] = ticketId.Value });
 }

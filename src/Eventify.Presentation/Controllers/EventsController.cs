@@ -22,24 +22,25 @@ public sealed class EventsController : ApiController
     public Task<IActionResult> CreateEvent(CreateEventRequest request, CancellationToken cancellationToken)
     {
         return SendAsync(request.Adapt<CreateEventCommand>(), cancellationToken)
-            .CreatedAtAction(
-                actionName: nameof(GetEventEditable),
-                routeValues: response => new { response.Id },
-                context: HttpContext);
+            .ToResponseAsync(response => CreatedAtAction(
+                    nameof(GetEvent),
+                    new { id = response.Id },
+                    response),
+                HttpContext);
     }
 
     [HttpPost("{id:guid}/publish")]
     public Task<IActionResult> Publish(Guid id, CancellationToken cancellationToken)
     {
         return SendAsync(new PublishEventCommand { EventId = id }, cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
     [HttpPost("{id:guid}/unpublish")]
     public Task<IActionResult> Unpublish(Guid id, CancellationToken cancellationToken)
     {
         return SendAsync(new UnpublishEventCommand { EventId = id }, cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
     [HttpPost("{id:guid}/poster")]
@@ -52,21 +53,21 @@ public sealed class EventsController : ApiController
                 EventId = id,
                 Poster = new FileProxy(poster)
             }, cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
     [HttpGet("{idOrSlug}"), AllowAnonymous]
     public Task<IActionResult> GetEvent(string idOrSlug, CancellationToken cancellationToken)
     {
         return SendAsync(new GetEventQuery { IdOrSlug = idOrSlug }, cancellationToken)
-            .Ok(HttpContext);
+            .ToResponseAsync(Ok, HttpContext);
     }
 
     [HttpGet("{id:guid}/edit")]
     public Task<IActionResult> GetEventEditable(Guid id, CancellationToken cancellationToken)
     {
         return SendAsync(new GetEventEditableQuery { EventId = id }, cancellationToken)
-            .Ok(HttpContext);
+            .ToResponseAsync(Ok, HttpContext);
     }
 
     [HttpGet, AllowAnonymous]
@@ -74,7 +75,7 @@ public sealed class EventsController : ApiController
         CancellationToken cancellationToken)
     {
         return SendAsync(request.Adapt<GetEventsQuery>(), cancellationToken)
-            .Ok(HttpContext);
+            .ToResponseAsync(Ok, HttpContext);
     }
 
     [HttpPost("{id:guid}/details")]
@@ -85,7 +86,7 @@ public sealed class EventsController : ApiController
             {
                 EventId = id
             }, cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
     [HttpPost("{id:guid}/location")]
@@ -96,7 +97,7 @@ public sealed class EventsController : ApiController
             {
                 EventId = id
             }, cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
     [HttpPost("{id:guid}/period")]
@@ -107,7 +108,7 @@ public sealed class EventsController : ApiController
             {
                 EventId = id
             }, cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
     [HttpPost("{id:guid}/slug")]
@@ -118,20 +119,20 @@ public sealed class EventsController : ApiController
             {
                 EventId = id
             }, cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
     [HttpDelete("{id:guid}")]
     public Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
     {
         return SendAsync(new DeleteEventCommand { EventId = id }, cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 
     [HttpDelete("{id:guid}/poster")]
     public Task<IActionResult> RemovePoster(Guid id, CancellationToken cancellationToken)
     {
         return SendAsync(new RemoveEventPosterCommand { EventId = id }, cancellationToken)
-            .NoContent(HttpContext);
+            .ToResponseAsync(_ => NoContent(), HttpContext);
     }
 }

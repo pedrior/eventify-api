@@ -11,13 +11,13 @@ public sealed class AccountController : ApiController
     public Task<IActionResult> Login(LoginRequest request, CancellationToken cancellationToken)
     {
         return SendAsync(request.Adapt<LoginCommand>(), cancellationToken)
-            .Ok(HttpContext);
+            .ToResponseAsync(Ok, HttpContext);
     }
 
     [HttpPost("register"), AllowAnonymous]
     public Task<IActionResult> Register(RegisterRequest request, CancellationToken cancellationToken)
     {
         return SendAsync(request.Adapt<RegisterCommand>(), cancellationToken)
-            .CreatedAtAction(actionName: nameof(Login), routeValues: new { }, context: HttpContext);
+            .ToResponseAsync(response => CreatedAtAction(nameof(Login), new { }, response), HttpContext);
     }
 }

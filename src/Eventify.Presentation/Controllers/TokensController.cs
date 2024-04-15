@@ -10,6 +10,6 @@ public sealed class TokensController : ApiController
     public Task<IActionResult> RefreshToken(RefreshTokenRequest request, CancellationToken cancellationToken)
     {
         return SendAsync(request.Adapt<RefreshTokenCommand>(), cancellationToken)
-            .Ok(HttpContext);
+            .ToResponseAsync(Ok, HttpContext);
     }
 }

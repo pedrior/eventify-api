@@ -16,10 +16,10 @@ internal static class EventErrors
     public static Error NotFound(EventId eventId) => Error.NotFound(
         "Event not found",
         code: "event.not_found",
-        details: new Dictionary<string, object?> { ["event_id"] = eventId.Value }.ToFrozenDictionary());
+        details: new Dictionary<string, object?> { ["event_id"] = eventId.Value });
 
     public static Error NotFound(Slug slug) => Error.NotFound(
         "Event not found",
         code: "event.not_found",
-        details: new Dictionary<string, object?> { ["slug"] = slug.Value }.ToFrozenDictionary());
+        details: new Dictionary<string, object?> { ["slug"] = slug.Value });
 }
