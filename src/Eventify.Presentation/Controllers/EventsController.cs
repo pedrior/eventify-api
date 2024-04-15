@@ -24,7 +24,7 @@ public sealed class EventsController : ApiController
         return SendAsync(request.Adapt<CreateEventCommand>(), cancellationToken)
             .ToResponseAsync(response => CreatedAtAction(
                     nameof(GetEvent),
-                    new { id = response.Id },
+                    new { idOrSlug = response.Id },
                     response),
                 HttpContext);
     }
