@@ -10,7 +10,7 @@ namespace Eventify.Presentation.Controllers;
 [ApiVersion(1)]
 public sealed class AttendeesController : ApiController
 {
-    [HttpPost("pprofile-icture")]
+    [HttpPost("profile-picture")]
     [RequestSizeLimit(RequestConstants.ImageSizeLimit)]
     public Task<IActionResult> UploadPicture([FromForm(Name = "picture")] IFormFile picture,
         CancellationToken cancellationToken)
