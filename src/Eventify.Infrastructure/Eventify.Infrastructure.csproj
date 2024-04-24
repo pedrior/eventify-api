@@ -12,8 +12,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Amazon.AspNetCore.Identity.Cognito" Version="3.0.1" />
-      <PackageReference Include="AWSSDK.S3" Version="3.7.307.15" />
+      <PackageReference Include="Amazon.AspNetCore.Identity.Cognito" Version="3.0.2" />
+      <PackageReference Include="AWSSDK.S3" Version="3.7.307.21" />
       <PackageReference Include="EntityFrameworkCore.NamingConventions" Version="8.0.0" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
